@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useRef } from "react";
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
-  let placeholderClass = "";
+  const form: any = useRef();
 
   let [formInputValues, updateFormInputValues] = useState({
     name: "",
@@ -15,13 +17,19 @@ const Contact = () => {
     messageErr: "",
   };
 
+  let [submitStatus, setSubmitStatus] = useState(false);
+  let [submitMsg, setSubmitMsg] = useState("Message sent successfully!");
+
   let [errorMessage, setErrorMessage] = useState(validationErrors);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
     if (formInputValues.name.trim() == "") {
       validationErrors.nameErr = "Name is required";
+      setSubmitStatus(false);
       setErrorMessage(validationErrors);
     } else {
       validationErrors.nameErr = "";
@@ -30,18 +38,36 @@ const Contact = () => {
 
     if (formInputValues.email.trim() == "") {
       validationErrors.emailErr = "Email is required";
+      setSubmitStatus(false);
       setErrorMessage(validationErrors);
     } else {
       validationErrors.emailErr = "";
       setErrorMessage(validationErrors);
+      if (!regex.test(formInputValues.email)) {
+        validationErrors.emailErr = "This is not a valid email";
+        setSubmitStatus(false);
+        setErrorMessage(validationErrors);
+      } else {
+        validationErrors.emailErr = "";
+        setErrorMessage(validationErrors);
+      }
     }
 
     if (formInputValues.message.trim() == "") {
       validationErrors.messageErr = "Message is required";
+      setSubmitStatus(false);
       setErrorMessage(validationErrors);
     } else {
       validationErrors.messageErr = "";
       setErrorMessage(validationErrors);
+      if (formInputValues.message.length > 600) {
+        validationErrors.messageErr = "Please use less than 600 characters";
+        setSubmitStatus(false);
+        setErrorMessage(validationErrors);
+      } else {
+        validationErrors.messageErr = "";
+        setErrorMessage(validationErrors);
+      }
     }
 
     if (
@@ -49,36 +75,26 @@ const Contact = () => {
       validationErrors.emailErr == "" &&
       validationErrors.messageErr == ""
     ) {
-      alert("Message sent successfully!");
+      setSubmitStatus(true);
+      /*
+      emailjs.sendForm("service_smg8wn5", "template_1zf4cfw", form.current, {
+        publicKey: "j-xpcyQBJjDmJovIA",
+      });
+      */
+      emailjs.sendForm(
+        import.meta.env.VITE_SERVICE_KEY,
+        import.meta.env.VITE_TEMPLATE_KEY,
+        form.current,
+        import.meta.env.VITE_PUBLIC_KEY
+      );
+
+      alert(JSON.stringify(import.meta.env.VITE_PUBLIC_KEY));
     }
   }
 
-  function handlePlaceholder(formName: string) {
-    if (formName == "name") {
-      if (errorMessage.nameErr == "") {
-        return "Name";
-      } else {
-        placeholderClass = "placeholder:text-red-500";
-        return errorMessage.nameErr;
-      }
-    }
-    if (formName == "email") {
-      if (errorMessage.emailErr == "") {
-        return "Email *";
-      } else {
-        placeholderClass = "placeholder:text-red-500";
-        return errorMessage.emailErr;
-      }
-    }
-
-    if (formName == "message") {
-      if (errorMessage.messageErr == "") {
-        return "Write your message here...";
-      } else {
-        placeholderClass = "placeholder:text-red-500";
-        return errorMessage.messageErr;
-      }
-    }
+  function submitTimeout() {
+    setTimeout(() => setSubmitMsg(""), 3 * 1000);
+    return null;
   }
 
   return (
@@ -86,9 +102,10 @@ const Contact = () => {
       <div className="text-black flex flex-col justify-center items-center w-[1110px] mx-auto">
         <h1 className="text-4xl mb-8">How can I help?</h1>
         <form
+          ref={form}
           className="flex flex-col [&>input]:mb-4 w-[600px] box-border"
           onSubmit={handleSubmit}
-          name="formValues"
+          name="formData"
           autoComplete="on"
         >
           <div className="flex mb-[20px]">
@@ -98,18 +115,17 @@ const Contact = () => {
                   type="text"
                   name="name"
                   autoComplete="on"
-                  placeholder={handlePlaceholder("name")}
-                  maxLength={20}
+                  placeholder={"Name"}
+                  maxLength={30}
                   onChange={(e) =>
                     updateFormInputValues({
                       ...formInputValues,
                       name: e.target.value,
                     })
                   }
-                  className={
-                    "border h-[40px] w-[290px] p-4 " + placeholderClass
-                  }
+                  className={"border h-[40px] w-[290px] p-4"}
                 />
+                <p className="text-red-500">{errorMessage.nameErr}</p>
               </div>
             </div>
             <div className="flex w-[50%]">
@@ -118,18 +134,17 @@ const Contact = () => {
                   type="text"
                   name="email"
                   autoComplete="on"
-                  placeholder={handlePlaceholder("email")}
+                  placeholder="Email"
                   onChange={(e) =>
                     updateFormInputValues({
                       ...formInputValues,
                       email: e.target.value,
                     })
                   }
-                  className={
-                    "border h-[40px] w-[290px] p-4 " + placeholderClass
-                  }
+                  className={"border h-[40px] w-[290px] p-4"}
                   maxLength={40}
                 />
+                <p className="text-red-500">{errorMessage.emailErr}</p>
               </div>
             </div>
           </div>
@@ -138,15 +153,17 @@ const Contact = () => {
               <textarea
                 name="message"
                 rows={6}
-                placeholder={handlePlaceholder("message")}
+                maxLength={1200}
+                placeholder={"Enter your message here..."}
                 onChange={(e) =>
                   updateFormInputValues({
                     ...formInputValues,
                     message: e.target.value,
                   })
                 }
-                className={"border w-[600px] p-4 " + placeholderClass}
-              ></textarea>
+                className={"border resize-none w-[600px] p-4"}
+              />
+              <p className="text-red-500">{errorMessage.messageErr}</p>
             </div>
           </div>
           <button
@@ -157,6 +174,8 @@ const Contact = () => {
             Send
           </button>
         </form>
+        {submitStatus == true ? <p>{submitMsg}</p> : null}
+        {submitStatus == true ? submitTimeout() : null}
       </div>
     </>
   );
