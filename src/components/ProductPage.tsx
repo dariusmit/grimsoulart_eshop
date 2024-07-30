@@ -7,16 +7,16 @@ function ProductPage() {
 
   return (
     <>
-      <div className="flex text-[black] min-h-screen mt-[220px] h-auto w-[1200px] mx-auto">
-        <div className="w-[60%]">
-          <img src={data.fullImgUrl}></img>
+      <div className="flex text-[black] min-h-screen leading-loose tracking-wide mt-[220px] h-auto w-[1110px] mx-auto">
+        <div className="w-[60%] mr-12">
+          <img className="w-full h-auto" src={data.imgUrl}></img>
         </div>
         <div className="w-[40%]">
           <h1 className="text-4xl mb-4">{data.title}</h1>
           <h3 className="text-xl mb-4">{data.amount} EUR</h3>
           <div className="flex flex-col items-start">
             <a href={data.buyLink}>
-              <button className="w-[100%] p-4 border bg-black border-black text-white mb-4">
+              <button className="w-[200px] p-4 border hover:scale-105 transition ease-in-out duration-300 bg-black border-black text-white mb-4">
                 Buy it now
               </button>
             </a>
@@ -57,11 +57,13 @@ function ProductPage() {
                 shipped. After the purchase you will get an email with a Google
                 drive link to download these source files:
               </p>
-              <ul>
+              <br />
+              <ul className="[&>li]:list-disc [&>li]:ml-4 [&>li]:pl-1">
                 <li>Vector SVG file;</li>
                 <li>Vector PDF file;</li>
                 <li>High resolution PNG file;</li>
               </ul>
+              <br />
               <p>
                 After the sale, the file will be no longer available to
                 purchase.
@@ -69,20 +71,23 @@ function ProductPage() {
             </Collapsible>
             <Collapsible title="What People Say">
               <p>What people that worked with me before say about my art?</p>
-              <p>Chad Peek</p>
+              <br />
+              <p className="font-bold">Chad Peek</p>
               <p>⭐⭐⭐⭐⭐</p>
               <p>
                 "Hands down...Darius is one of the best!" "He is patient,
                 professional and his imagination and artwork can't be beat!!"
               </p>
-              <p>Hellhookah</p>
+              <br />
+              <p className="font-bold">Hellhookah</p>
               <p>⭐⭐⭐⭐⭐</p>
               <p>
                 "Grimsoul art did a couple of awesome artworks for our band
                 Hellhookah. It was a pleasure to work together, and we were
                 really happy with the results. Thank you!"
               </p>
-              <p>Three Queens Spice Co./</p>
+              <br />
+              <p className="font-bold">Three Queens Spice Co.</p>
               <p>⭐⭐⭐⭐⭐</p>
               <p>
                 "Artwork for Business. I have worked with Darius twice in order
@@ -104,8 +109,9 @@ function ProductPage() {
                 product he wishes, he can create any number of products he wants
                 and can sell them in any location of the world indefinitely.
               </p>
+              <br />
               <p>The Buyer agrees to these limitations:</p>
-              <ul>
+              <ul className="[&>li]:list-disc [&>li]:ml-4 [&>li]:pl-1">
                 <li>Artist retains copyright of the Artwork;</li>
                 <li>
                   Artist retains the right to sell art prints digitally or
@@ -123,6 +129,7 @@ function ProductPage() {
                   itself;
                 </li>
               </ul>
+              <br />
               <p>
                 By buying this Artwork the Buyer agrees to all the rules written
                 above this statement.
