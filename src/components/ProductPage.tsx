@@ -7,7 +7,7 @@ function ProductPage() {
 
   return (
     <>
-      <div className="flex text-[black] min-h-screen h-auto w-[1200px] mx-auto">
+      <div className="flex text-[black] min-h-screen mt-[220px] h-auto w-[1200px] mx-auto">
         <div className="w-[60%]">
           <img src={data.fullImgUrl}></img>
         </div>

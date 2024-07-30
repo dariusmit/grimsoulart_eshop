@@ -23,7 +23,7 @@ function ProductCard({ title, price, imgUrl, fullImgUrl, buyLink }: Props) {
           <div className="w-full h-full">
             <img className="w-full h-full" src={imgUrl}></img>
           </div>
-          <div className="text-[black] bg-slate-100 p-4">
+          <div className="text-[black] bg-gray-50 p-6">
             <p>{title}</p>
             <p>{price} EUR</p>
           </div>

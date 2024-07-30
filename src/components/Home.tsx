@@ -5,7 +5,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="flex flex-wrap w-[1110px] mb-32 mx-auto">
+      <div className="flex flex-wrap w-[1110px] mb-32 mt-[220px] mx-auto">
         <ProductCard
           title="Stone Devil"
           price={200}
