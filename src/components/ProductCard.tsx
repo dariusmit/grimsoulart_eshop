@@ -4,11 +4,12 @@ interface Props {
   title: string;
   price: number;
   imgUrl: string;
+  productUrl: string;
   buyLink?: string;
 }
 
-function ProductCard({ title, price, imgUrl, buyLink }: Props) {
-  const pathname = "/product";
+function ProductCard({ title, price, imgUrl, productUrl, buyLink }: Props) {
+  const pathname = productUrl;
   const data = {
     title: title,
     amount: price,
