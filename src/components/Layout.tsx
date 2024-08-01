@@ -17,7 +17,7 @@ const Layout = () => {
   };
 
   function scrollToTop() {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   return (
@@ -26,13 +26,13 @@ const Layout = () => {
       <div>
         {toTopVisibility ? (
           <button
-            className="fixed bottom-0 right-0 pr-28 pb-48"
+            className="fixed bottom-0 hover:scale-105 transition ease-in-out duration-300 opacity-40 scroll-smooth right-0 pr-12 pb-40"
             onClick={scrollToTop}
           >
             <div className="flex flex-col items-center justify-center">
               <img
-                className="w-[40px] h-auto mb-4 mr-[4px]"
-                src="../../images/scroll_top.png"
+                className="w-[50px] h-auto mr-[4px]"
+                src="../../images/scroll_top.svg"
               />
               <b className="text-xl">Scroll Top</b>
             </div>

@@ -99,7 +99,7 @@ const Contact = () => {
 
   return (
     <>
-      <div className="text-black flex flex-col justify-center mt-[40px] items-center w-[1110px] mx-auto">
+      <div className="text-gray-800 flex flex-col justify-center mt-[40px] items-center w-[1110px] mx-auto">
         <h1 className="text-4xl justify-self-start mb-8">How can I help?</h1>
         <form
           ref={form}
@@ -123,7 +123,7 @@ const Contact = () => {
                       name: e.target.value,
                     })
                   }
-                  className={"border h-[40px] w-[290px] p-4"}
+                  className="border h-[40px] w-[290px] p-4"
                 />
                 <p className="text-red-500">{errorMessage.nameErr}</p>
               </div>

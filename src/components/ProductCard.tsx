@@ -18,7 +18,7 @@ function ProductCard({ title, price, imgUrl, productUrl, buyLink }: Props) {
   };
   return (
     <>
-      <div className="w-[360px] h-[360px] mr-[10px] mb-[106px]">
+      <div className="w-[360px] h-[360px] mr-[10px] mb-[106px] hover:scale-[104%] transition ease-in-out duration-300">
         <Link to={pathname} state={data}>
           <div className="w-full h-full">
             <img
@@ -26,7 +26,7 @@ function ProductCard({ title, price, imgUrl, productUrl, buyLink }: Props) {
               src={imgUrl}
             ></img>
           </div>
-          <div className="text-[black] bg-gray-100 p-6">
+          <div className="text-gray-800 bg-gray-100 p-6">
             <p>{title}</p>
             <p>{price} EUR</p>
           </div>

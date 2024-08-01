@@ -27,11 +27,11 @@ function Collapsible({ title, children, style }: Props) {
         }
         className={"pb-2 hover:cursor-pointer w-full border-t " + style}
       >
-        <h1 className="flex py-2">
+        <h1 className="flex py-2 text-gray-700">
           {setEmoji()}
           {title}
         </h1>
-        <div className={collapsibleClass}>{children}</div>
+        <div className={" " + collapsibleClass}>{children}</div>
       </div>
     </>
   );

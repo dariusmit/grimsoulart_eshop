@@ -34,7 +34,7 @@ function Header() {
       <div className="flex flex-col text-white items-center justify-center w-full bg-[black] p-[30px]">
         <Link to="/">
           <img
-            className="mb-6 w-[250px] h-auto hover:scale-105 transition ease-in-out duration-300"
+            className="mb-6 w-[250px] h-auto hover:scale-[104%] transition ease-in-out duration-300"
             src="../../images/logo.png"
           ></img>
         </Link>

@@ -5,9 +5,11 @@ const About = () => {
         <div className="w-[30%] mr-14">
           <img src="../../images/profile.jpg" />
         </div>
-        <div className="flex flex-col justify-center w-[70%] text-black">
-          <h1 className="text-4xl mb-4">Grimsoul Art / Darius Molotokas</h1>
-          <p className="leading-relaxed tracking-wide max-w-[600px]">
+        <div className="flex flex-col justify-center w-[70%]">
+          <h1 className="text-4xl mb-4 text-gray-800">
+            Grimsoul Art / Darius Molotokas
+          </h1>
+          <p className="leading-relaxed tracking-wide text-gray-500 max-w-[600px]">
             Grimsoul Art – my pseudonym, my real name is Darius Molotokas and I
             am Dark / Skull artist from Lithuania. I express my own passions for
             the darker side of the world and pen and ink is what shapes it. I am

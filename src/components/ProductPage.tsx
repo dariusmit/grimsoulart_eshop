@@ -10,13 +10,13 @@ function ProductPage() {
 
   return (
     <>
-      <div className="flex text-[black] min-h-screen leading-loose tracking-wide mt-[40px] h-auto w-[1110px] mx-auto">
+      <div className="flex text-gray-500 min-h-screen leading-loose tracking-wide mt-[40px] h-auto w-[1110px] mx-auto">
         <div className="w-[60%] mr-12">
           <img className="w-full blur-[0.5px] h-auto" src={data.imgUrl}></img>
         </div>
         <div className="w-[40%]">
-          <h1 className="text-4xl mb-4">{data.title}</h1>
-          <h3 className="text-xl mb-4">{data.amount} EUR</h3>
+          <h1 className="text-4xl text-gray-800 mb-4">{data.title}</h1>
+          <h3 className="text-xl text-gray-700 mb-4">{data.amount} EUR</h3>
           <div className="flex flex-col items-start w-full">
             <a className="w-full" href={data.buyLink}>
               <button className="w-full px-4 py-2 border hover:scale-105 transition ease-in-out duration-300 bg-black border-black text-white mb-4">
@@ -27,7 +27,15 @@ function ProductPage() {
           <div className="mb-8">
             <p>
               🔒Pressing Buy will redirect you to securely pay with{" "}
-              <b>Stripe</b>
+              <b>
+                <a
+                  className="hover:underline"
+                  href="https://stripe.com/en-lt"
+                  target="_blank"
+                >
+                  Stripe
+                </a>
+              </b>
             </p>
             <br />
             <p>✳️ THIS IS INSTANT DIGITAL ART DOWNLOAD ✳️</p>
@@ -62,10 +70,9 @@ function ProductPage() {
             <Collapsible title="Instant Download">
               <p>
                 This is a digital art download. No physical item will be
-                shipped. After the purchase you will get an email with a Google
-                drive link to download these source files:
+                shipped. After the purchase you will get a Google drive link to
+                download these source files:
               </p>
-              <br />
               <ul className="[&>li]:list-disc [&>li]:ml-4 [&>li]:pl-1">
                 <li>Vector SVG file;</li>
                 <li>Vector PDF file;</li>
@@ -78,25 +85,23 @@ function ProductPage() {
               </p>
             </Collapsible>
             <Collapsible title="What People Say">
-              <p>What people that worked with me before say about my art?</p>
-              <br />
-              <p className="font-bold">Chad Peek</p>
-              <p>⭐⭐⭐⭐⭐</p>
+              <p className="underline">Chad Peek</p>
+              <p className="opacity-80">⭐⭐⭐⭐⭐</p>
               <p>
                 "Hands down...Darius is one of the best!" "He is patient,
                 professional and his imagination and artwork can't be beat!!"
               </p>
               <br />
-              <p className="font-bold">Hellhookah</p>
-              <p>⭐⭐⭐⭐⭐</p>
+              <p className="underline">Hellhookah</p>
+              <p className="opacity-80">⭐⭐⭐⭐⭐</p>
               <p>
                 "Grimsoul art did a couple of awesome artworks for our band
                 Hellhookah. It was a pleasure to work together, and we were
                 really happy with the results. Thank you!"
               </p>
               <br />
-              <p className="font-bold">Three Queens Spice Co.</p>
-              <p>⭐⭐⭐⭐⭐</p>
+              <p className="underline">Three Queens Spice Co.</p>
+              <p className="opacity-80">⭐⭐⭐⭐⭐</p>
               <p>
                 "Artwork for Business. I have worked with Darius twice in order
                 to obtain some artwork for my business. Both times he has
