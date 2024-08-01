@@ -1,7 +1,7 @@
 const About = () => {
   return (
     <>
-      <div className="flex w-[1110px] mt-[220px] mx-auto">
+      <div className="flex w-[1110px] mt-[40px] mx-auto">
         <div className="w-[30%] mr-14">
           <img src="../../images/profile.jpg" />
         </div>

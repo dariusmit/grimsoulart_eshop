@@ -18,10 +18,13 @@ function ProductCard({ title, price, imgUrl, productUrl, buyLink }: Props) {
   };
   return (
     <>
-      <div className="w-[360px] h-[360px] mr-[10px] mb-[107px]">
+      <div className="w-[360px] h-[360px] mr-[10px] mb-[106px]">
         <Link to={pathname} state={data}>
           <div className="w-full h-full">
-            <img className="object-cover w-full h-full" src={imgUrl}></img>
+            <img
+              className="object-cover blur-[0.6px] w-full h-full"
+              src={imgUrl}
+            ></img>
           </div>
           <div className="text-[black] bg-gray-100 p-6">
             <p>{title}</p>

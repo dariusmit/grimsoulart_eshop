@@ -31,13 +31,36 @@ function Header() {
 
   return (
     <>
-      <div className="flex flex-col text-white items-center fixed top-0 left-0 justify-center w-full bg-[black] p-[30px]">
+      <div className="flex flex-col text-white items-center justify-center w-full bg-[black] p-[30px]">
         <Link to="/">
           <img
-            className="mb-6 w-[250px] h-auto"
+            className="mb-6 w-[250px] h-auto hover:scale-105 transition ease-in-out duration-300"
             src="../../images/logo.png"
           ></img>
         </Link>
+        <div className="flex absolute top-[30px] right-[406px]">
+          <a
+            className="hover:scale-110 transition ease-in-out duration-300"
+            href="https://www.instagram.com/grimsoulart/"
+            target="_blank"
+          >
+            <img
+              className="w-[20px] h-auto mr-6"
+              src="../../images/instagram-icon.svg"
+            />
+          </a>
+          <a
+            className="hover:scale-110 transition ease-in-out duration-300"
+            href="https://www.pinterest.com/grimsoulart/"
+            target="_blank"
+          >
+            <img
+              className="w-[20px] h-auto"
+              src="../../images/pinterest-icon.svg"
+            />
+          </a>
+        </div>
+
         <div className="flex [&>a]:mr-[20px]">
           <Link
             className={

@@ -3,7 +3,7 @@ import ProductCard from "./ProductCard";
 const Home = () => {
   return (
     <>
-      <div className="flex flex-wrap w-[1110px] h-auto mt-[220px] mx-auto">
+      <div className="flex flex-wrap w-[1110px] h-auto mt-[40px] mx-auto">
         <ProductCard
           title="Raven and Candles"
           price={200}

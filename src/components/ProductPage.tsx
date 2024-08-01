@@ -1,27 +1,35 @@
 import { useLocation } from "react-router-dom";
 import Collapsible from "./Collapsible";
+import { useEffect } from "react";
 
 function ProductPage() {
   const location = useLocation();
   const data = location.state;
 
+  useEffect(() => window.scrollTo(0, 0), []);
+
   return (
     <>
-      <div className="flex text-[black] min-h-screen leading-loose tracking-wide mt-[220px] h-auto w-[1110px] mx-auto">
+      <div className="flex text-[black] min-h-screen leading-loose tracking-wide mt-[40px] h-auto w-[1110px] mx-auto">
         <div className="w-[60%] mr-12">
-          <img className="w-full h-auto" src={data.imgUrl}></img>
+          <img className="w-full blur-[0.5px] h-auto" src={data.imgUrl}></img>
         </div>
         <div className="w-[40%]">
           <h1 className="text-4xl mb-4">{data.title}</h1>
           <h3 className="text-xl mb-4">{data.amount} EUR</h3>
-          <div className="flex flex-col items-start">
-            <a href={data.buyLink}>
-              <button className="w-[200px] p-4 border hover:scale-105 transition ease-in-out duration-300 bg-black border-black text-white mb-4">
-                Buy it now
+          <div className="flex flex-col items-start w-full">
+            <a className="w-full" href={data.buyLink}>
+              <button className="w-full px-4 py-2 border hover:scale-105 transition ease-in-out duration-300 bg-black border-black text-white mb-4">
+                Buy it Now
               </button>
             </a>
           </div>
           <div className="mb-8">
+            <p>
+              🔒Pressing Buy will redirect you to securely pay with{" "}
+              <b>Stripe</b>
+            </p>
+            <br />
             <p>✳️ THIS IS INSTANT DIGITAL ART DOWNLOAD ✳️</p>
             <br />
             <p>
@@ -116,7 +124,9 @@ function ProductPage() {
                 <li>
                   Artist retains the right to sell art prints digitally or
                   physically using this Artwork indefinitely on any platform and
-                  in any location of the world he desires;
+                  in any location of the world he desires. Buyer is not allowed
+                  to sell art prints using this Artwork, because that would lead
+                  to conflict of interests;
                 </li>
                 <li>
                   Artist retains the right to display (for marketing purposes)

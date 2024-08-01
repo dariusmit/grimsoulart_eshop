@@ -99,7 +99,7 @@ const Contact = () => {
 
   return (
     <>
-      <div className="text-black flex flex-col justify-center mt-[220px] items-center w-[1110px] mx-auto">
+      <div className="text-black flex flex-col justify-center mt-[40px] items-center w-[1110px] mx-auto">
         <h1 className="text-4xl justify-self-start mb-8">How can I help?</h1>
         <form
           ref={form}
@@ -167,7 +167,7 @@ const Contact = () => {
             </div>
           </div>
           <button
-            className="bg-black text-white hover:scale-105 transition ease-in-out duration-300 p-2 mt-4 w-[226px]"
+            className="bg-black text-white hover:scale-105 transition ease-in-out duration-300 px-4 py-2 mt-4 w-[226px]"
             type="submit"
             value="Submit"
           >
@@ -179,7 +179,7 @@ const Contact = () => {
             <p className="mr-4">{submitMsg}</p>
             <button
               className={
-                "text-white hover:scale-105 transition ease-in-out duration-300 p-2 " +
+                "text-white hover:scale-105 transition ease-in-out duration-300 px-4 py-2 " +
                 btnBgColor
               }
               onClick={closeMsg}
