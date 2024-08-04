@@ -99,18 +99,22 @@ const Contact = () => {
 
   return (
     <>
-      <div className="text-gray-800 flex flex-col justify-center mt-[40px] items-center w-[1110px] mx-auto">
-        <h1 className="text-4xl justify-self-start mb-8">How can I help?</h1>
+      <div
+        className="text-gray-800 px-4 mt-8 items-center mb-[11.55rem] flex flex-col justify-center
+      min-[1024px]:p-0 min-[1024px]:w-[900px] min-[1024px]:mx-auto min-[1024px]:mb-auto
+      min-[1440px]:w-[1110px] min-[1440px]:mt-16"
+      >
+        <h1 className="text-4xl mb-8">How can I help?</h1>
         <form
           ref={form}
-          className="flex flex-col [&>input]:mb-4 w-[600px] box-border"
+          className="flex flex-col w-full [&>input]:mb-4 min-[1024px]:w-[600px] box-border"
           onSubmit={handleSubmit}
           name="formData"
           autoComplete="on"
         >
-          <div className="flex mb-[20px]">
-            <div className="flex w-[50%] mr-[20px]">
-              <div>
+          <div className="flex flex-col min-[1024px]:flex min-[1024px]:flex-row mb-[20px]">
+            <div className="flex w-full min-[1024px]:w-[50%] mr-[20px]">
+              <div className="w-full">
                 <input
                   type="text"
                   name="name"
@@ -123,13 +127,13 @@ const Contact = () => {
                       name: e.target.value,
                     })
                   }
-                  className="border h-[40px] w-[290px] p-4"
+                  className="border w-full h-[40px] min-[1024px]:w-[290px] mb-4 p-4 min-[1024px]:mb-0"
                 />
                 <p className="text-red-500">{errorMessage.nameErr}</p>
               </div>
             </div>
-            <div className="flex w-[50%]">
-              <div>
+            <div className="flex min-[1024px]:w-[50%]">
+              <div className="w-full">
                 <input
                   type="text"
                   name="email"
@@ -141,7 +145,7 @@ const Contact = () => {
                       email: e.target.value,
                     })
                   }
-                  className={"border h-[40px] w-[290px] p-4"}
+                  className="border w-full h-[40px] min-[1024px]:w-[290px] p-4 mb-0 min-[1024px]:mb-0"
                   maxLength={40}
                 />
                 <p className="text-red-500">{errorMessage.emailErr}</p>
@@ -149,7 +153,7 @@ const Contact = () => {
             </div>
           </div>
           <div className="flex">
-            <div>
+            <div className="w-full">
               <textarea
                 name="message"
                 rows={6}
@@ -161,13 +165,13 @@ const Contact = () => {
                     message: e.target.value,
                   })
                 }
-                className={"border resize-none w-[600px] p-4"}
+                className="border w-full resize-none min-[1024px]:w-[600px] p-4"
               />
               <p className="text-red-500">{errorMessage.messageErr}</p>
             </div>
           </div>
           <button
-            className="bg-black text-white hover:scale-105 transition ease-in-out duration-300 px-4 py-2 mt-4 w-[226px]"
+            className="bg-black text-white hover:scale-105 w-full transition ease-in-out duration-300 px-4 py-2 mt-4 min-[1024px]:w-[226px]"
             type="submit"
             value="Submit"
           >

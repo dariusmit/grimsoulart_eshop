@@ -1,7 +1,10 @@
 function Footer() {
   return (
     <>
-      <div className="bg-[black] mt-14 text-white p-8 flex flex-col items-center justify-center">
+      <div
+        className="bg-[black] text-white p-8 flex flex-col items-center justify-center
+      "
+      >
         <div className="flex mb-6">
           <a
             className="hover:scale-110 transition ease-in-out duration-300"

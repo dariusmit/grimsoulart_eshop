@@ -22,25 +22,28 @@ const Layout = () => {
 
   return (
     <>
-      <Header />
-      <div>
-        {toTopVisibility ? (
-          <button
-            className="fixed bottom-0 hover:scale-105 transition ease-in-out duration-300 opacity-40 scroll-smooth right-0 pr-12 pb-40"
-            onClick={scrollToTop}
-          >
-            <div className="flex flex-col items-center justify-center">
-              <img
-                className="w-[50px] h-auto mr-[4px]"
-                src="../../images/scroll_top.svg"
-              />
-              <b className="text-xl">Scroll Top</b>
-            </div>
-          </button>
-        ) : null}
+      <div className="flex flex-col min-[1024px]:h-screen">
+        <Header />
+        <div>
+          {toTopVisibility ? (
+            <button
+              className="hidden min-[1440px]:block min-[1440px]:fixed min-[1440px]:bottom-0 min-[1440px]:hover:scale-105 min-[1440px]:transition 
+            min-[1440px]:ease-in-out min-[1440px]:duration-300 min-[1440px]:opacity-40 min-[1440px]:scroll-smooth min-[1440px]:right-0 min-[1440px]:pr-12 min-[1440px]:pb-40"
+              onClick={scrollToTop}
+            >
+              <div className="min-[1440px]:flex min-[1440px]:flex-col min-[1440px]:items-center min-[1440px]:justify-center">
+                <img
+                  className="min-[1440px]:w-[50px] min-[1440px]:h-auto min-[1440px]:mr-[4px]"
+                  src="../../images/scroll_top.svg"
+                />
+                <b className="min-[1440px]:text-xl">Scroll Top</b>
+              </div>
+            </button>
+          ) : null}
+        </div>
+        <Outlet />
+        <Footer />
       </div>
-      <Outlet />
-      <Footer />
     </>
   );
 };

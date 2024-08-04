@@ -6,9 +6,17 @@ interface Props {
   imgUrl: string;
   productUrl: string;
   buyLink?: string;
+  marginValues?: string;
 }
 
-function ProductCard({ title, price, imgUrl, productUrl, buyLink }: Props) {
+function ProductCard({
+  title,
+  price,
+  imgUrl,
+  productUrl,
+  buyLink,
+  marginValues,
+}: Props) {
   const pathname = productUrl;
   const data = {
     title: title,
@@ -18,11 +26,23 @@ function ProductCard({ title, price, imgUrl, productUrl, buyLink }: Props) {
   };
   return (
     <>
-      <div className="w-[360px] h-[360px] mr-[10px] mb-[106px] hover:scale-[104%] transition ease-in-out duration-300">
+      <div
+        className={
+          "w-full h-full pb-4 " +
+          "min-[1024px]:w-[31vw] min-[1024px]:h-auto " +
+          "min-[1024px]:hover:scale-[104%] min-[1024px]:transition min-[1024px]:p-0 min-[1024px]:ease-in-out min-[1024px]:duration-300 " +
+          "min-[1440px]:max-w-[32%] " +
+          marginValues
+        }
+      >
         <Link to={pathname} state={data}>
-          <div className="w-full h-full">
+          <div
+            className="w-full h-full
+          min-[1024px]:h-[31vw]
+          min-[1440px]:max-h-[360px]"
+          >
             <img
-              className="object-cover blur-[0.6px] w-full h-full"
+              className="object-cover blur-[0.6px] w-full h-[95.73vw] min-[1024px]:h-full"
               src={imgUrl}
             ></img>
           </div>

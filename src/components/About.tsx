@@ -1,11 +1,16 @@
 const About = () => {
   return (
     <>
-      <div className="flex w-[1110px] mt-[40px] mx-auto">
-        <div className="w-[30%] mr-14">
+      <div
+        className="flex flex-col mt-8 mb-16 px-4
+      min-[1024px]:flex-row min-[1024px]:w-[900px] min-[1024px]:mx-auto min-[1024px]:mb-auto
+      min-[1440px]:w-[1110px]
+      "
+      >
+        <div className="min-[1024px]:w-[30%] pb-4 min-[1024px]:mr-14">
           <img src="../../images/profile.jpg" />
         </div>
-        <div className="flex flex-col justify-center w-[70%]">
+        <div className="flex flex-col justify-center min-[1024px]:w-[70%]">
           <h1 className="text-4xl mb-4 text-gray-800">
             Grimsoul Art / Darius Molotokas
           </h1>

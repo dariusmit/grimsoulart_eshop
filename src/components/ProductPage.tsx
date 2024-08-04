@@ -10,16 +10,23 @@ function ProductPage() {
 
   return (
     <>
-      <div className="flex text-gray-500 min-h-screen leading-loose tracking-wide mt-[40px] h-auto w-[1110px] mx-auto">
-        <div className="w-[60%] mr-12">
-          <img className="w-full blur-[0.5px] h-auto" src={data.imgUrl}></img>
+      <div
+        className="flex w-full mt-8 mb-16 p-4 pt-0 flex-col mx-auto h-auto text-gray-500 min-h-screen leading-loose tracking-wide
+      min-[1024px]:flex-row min-[1024px]:mb-auto min-[1024px]:p-0 min-[1024px]:w-[900px] min-[1024px]:min-h-min min-[1024px]:pb-16
+      min-[1440px]:w-[1110px]"
+      >
+        <div className="min-[1024px]:w-[60%] min-[1024px]:mr-12">
+          <img
+            className="w-full min-[1024px]:w-full blur-[0.5px] mb-4 h-auto"
+            src={data.imgUrl}
+          ></img>
         </div>
-        <div className="w-[40%]">
+        <div className="w-full min-[1024px]:w-[40%]">
           <h1 className="text-4xl text-gray-800 mb-4">{data.title}</h1>
           <h3 className="text-xl text-gray-700 mb-4">{data.amount} EUR</h3>
           <div className="flex flex-col items-start w-full">
             <a className="w-full" href={data.buyLink}>
-              <button className="w-full px-4 py-2 border hover:scale-105 transition ease-in-out duration-300 bg-black border-black text-white mb-4">
+              <button className="w-full min-[1024px]:w-full px-4 py-2 border hover:scale-105 transition ease-in-out duration-300 bg-black border-black text-white mb-4">
                 Buy it Now
               </button>
             </a>

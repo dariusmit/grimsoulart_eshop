@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import Navigation from "./Navigation";
 
 function Header() {
   let [homeLink, setHomeLink] = useState("");
@@ -29,75 +30,68 @@ function Header() {
     }
   }, [location.pathname]);
 
+  let [mobileMenuVisibility, setMobileMenuVisibility] = useState(false);
+  let [mobileMenuPosition, setMobileMenuPosition] = useState("absolute");
+
+  function revealMobileMenu() {
+    if (mobileMenuVisibility == false) {
+      setMobileMenuVisibility(true);
+      setMobileMenuPosition("fixed");
+    } else {
+      setMobileMenuVisibility(false);
+      setMobileMenuPosition("absolute");
+    }
+  }
+
+  function disableMobileMenu(status: boolean) {
+    if (status == true) {
+      setMobileMenuVisibility(false);
+      setMobileMenuPosition("absolute");
+    }
+  }
+
   return (
     <>
-      <div className="flex flex-col text-white items-center justify-center w-full bg-[black] p-[30px]">
+      <div
+        className="flex flex-col-reverse text-white items-center justify-center w-full bg-[black]
+        min-[1024px]:p-[30px] min-[1024px]:flex-col min-[1024px]:mb-0"
+      >
         <Link to="/">
           <img
-            className="mb-6 w-[250px] h-auto hover:scale-[104%] transition ease-in-out duration-300"
+            className="my-10 w-[250px] h-auto hover:scale-[104%] transition ease-in-out duration-300 min-[1024px]:mb-6 min-[1024px]:mt-0"
             src="../../images/logo.png"
           ></img>
         </Link>
-        <div className="flex absolute top-[30px] right-[406px]">
-          <a
-            className="hover:scale-110 transition ease-in-out duration-300"
-            href="https://www.instagram.com/grimsoulart/"
-            target="_blank"
+        <div
+          className={
+            "w-[20px] h-auto z-[100] top-0 left-0 m-4 " + mobileMenuPosition
+          }
+        >
+          <button
+            onClick={revealMobileMenu}
+            className="hover:pointer min-[1024px]:hidden"
           >
-            <img
-              className="w-[20px] h-auto mr-6"
-              src="../../images/instagram-icon.svg"
-            />
-          </a>
-          <a
-            className="hover:scale-110 transition ease-in-out duration-300"
-            href="https://www.pinterest.com/grimsoulart/"
-            target="_blank"
-          >
-            <img
-              className="w-[20px] h-auto"
-              src="../../images/pinterest-icon.svg"
-            />
-          </a>
+            <img src="../../images/hamburger_menu.svg" />
+          </button>
         </div>
-
-        <div className="flex [&>a]:mr-[20px]">
-          <Link
-            className={
-              "border-b border-black hover:border-white hover:border-b pb-[1px] " +
-              homeLink
-            }
-            to="/"
-          >
-            Art for Sale
-          </Link>
-          <Link
-            className={
-              "border-b border-black hover:border-white pb-[1px]" +
-              " " +
-              aboutLink
-            }
-            to="/about"
-          >
-            About
-          </Link>
-          <Link
-            className={
-              "border-b border-black hover:border-white pb-[1px]" +
-              " " +
-              contactLink
-            }
-            to="/contact"
-          >
-            Contact
-          </Link>
-          <a
-            className="!mr-0 hover:border-b pb-[1px]"
-            href="https://www.etsy.com/shop/GrimsoulArt"
-            target="_blank"
-          >
-            T-Shirts on Etsy
-          </a>
+        {mobileMenuVisibility ? (
+          <div className="bg-black fixed z-[99] [&>a]:py-8 [&>a]:px-14 [&>a]:min-[1440px]:p-0 top-0 pt-4 pb-12 [&>a]:border-none [&>a]:pb-0 left-0 flex flex-col">
+            <Navigation
+              homeLink={homeLink}
+              aboutLink={aboutLink}
+              contactLink={contactLink}
+              disableMobileMenu={disableMobileMenu}
+            />
+            <div className="fixed top-0 left-0 w-full h-screen z-[-99] bg-black opacity-75"></div>
+          </div>
+        ) : null}
+        <div className="hidden min-[1024px]:flex min-[1024px]:[&>a]:mr-[20px]">
+          <Navigation
+            homeLink={homeLink}
+            aboutLink={aboutLink}
+            contactLink={contactLink}
+            disableMobileMenu={disableMobileMenu}
+          />
         </div>
       </div>
     </>
