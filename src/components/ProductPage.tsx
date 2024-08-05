@@ -17,7 +17,7 @@ function ProductPage() {
       >
         <div className="min-[1024px]:w-[60%] min-[1024px]:mr-12">
           <img
-            className="w-full min-[1024px]:w-full blur-[0.5px] mb-4 h-auto"
+            className="w-full blur-[0.3px] min-[1024px]:w-full min-[1024px]:blur-[0.5px] mb-4 h-auto"
             src={data.imgUrl}
           ></img>
         </div>
@@ -71,7 +71,7 @@ function ProductPage() {
               that, there are no returns, exchanges, cancellations or refunds.
             </p>
             <br />
-            <p>👇 See the agreement below before purchasing! 👇</p>
+            <p>👇 See the agreement below before purchasing!</p>
           </div>
           <div>
             <Collapsible title="Instant Download">

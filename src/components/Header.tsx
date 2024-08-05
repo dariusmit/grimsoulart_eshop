@@ -58,7 +58,7 @@ function Header() {
       >
         <Link to="/">
           <img
-            className="my-10 w-[250px] h-auto hover:scale-[104%] transition ease-in-out duration-300 min-[1024px]:mb-6 min-[1024px]:mt-0"
+            className="my-10 w-[250px] h-auto min-[1024px]:hover:scale-[104%] min-[1024px]:transition  min-[1024px]:ease-in-out min-[1024px]:duration-300 min-[1024px]:mb-6 min-[1024px]:mt-0"
             src="../../images/logo.png"
           ></img>
         </Link>

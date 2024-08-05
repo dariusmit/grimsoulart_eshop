@@ -25,6 +25,7 @@ const Contact = () => {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     isClicked(true);
+    console.log(submitBtn);
     e.preventDefault();
 
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
@@ -171,7 +172,7 @@ const Contact = () => {
             </div>
           </div>
           <button
-            className="bg-black text-white hover:scale-105 w-full transition ease-in-out duration-300 px-4 py-2 mt-4 min-[1024px]:w-[226px]"
+            className="bg-black text-white min-[1024px]:hover:scale-105 w-full min-[1024px]:transition min-[1024px]:ease-in-out min-[1024px]:duration-300 px-4 py-2 mt-4 min-[1024px]:w-[226px]"
             type="submit"
             value="Submit"
           >
