@@ -14,35 +14,74 @@ function App() {
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
-          <Route path="product/raven_and_candles" element={<ProductPage />} />
-          <Route path="product/stone_devil" element={<ProductPage />} />
-          <Route path="product/wolf_skull" element={<ProductPage />} />
-          <Route path="product/eating_scene" element={<ProductPage />} />
-          <Route path="product/weird_skull" element={<ProductPage />} />
-          <Route path="product/woman_and_bones" element={<ProductPage />} />
-          <Route path="product/skull_eating_bat" element={<ProductPage />} />
-          <Route path="product/mexican_skull" element={<ProductPage />} />
-          <Route path="product/zombie" element={<ProductPage />} />
-          <Route path="product/jungle_statues" element={<ProductPage />} />
-          <Route path="product/filth" element={<ProductPage />} />
-          <Route path="product/satan_horns" element={<ProductPage />} />
-          <Route path="product/rotten_skull" element={<ProductPage />} />
-          <Route path="product/angler_fish" element={<ProductPage />} />
-          <Route path="product/spider_skull" element={<ProductPage />} />
-          <Route path="product/tank_skull" element={<ProductPage />} />
+          <Route
+            path="product/raven_and_candles"
+            element={<ProductPage id={1} />}
+          />
+          <Route path="product/stone_devil" element={<ProductPage id={2} />} />
+          <Route path="product/wolf_skull" element={<ProductPage id={3} />} />
+          <Route path="product/eating_scene" element={<ProductPage id={4} />} />
+          <Route path="product/weird_skull" element={<ProductPage id={5} />} />
+          <Route
+            path="product/woman_and_bones"
+            element={<ProductPage id={6} />}
+          />
+          <Route
+            path="product/skull_eating_bat"
+            element={<ProductPage id={7} />}
+          />
+          <Route
+            path="product/mexican_skull"
+            element={<ProductPage id={8} />}
+          />
+          <Route path="product/zombie" element={<ProductPage id={9} />} />
+          <Route
+            path="product/jungle_statues"
+            element={<ProductPage id={10} />}
+          />
+          <Route path="product/filth" element={<ProductPage id={11} />} />
+          <Route path="product/satan_horns" element={<ProductPage id={12} />} />
+          <Route
+            path="product/rotten_skull"
+            element={<ProductPage id={13} />}
+          />
+          <Route path="product/angler_fish" element={<ProductPage id={14} />} />
+          <Route
+            path="product/spider_skull"
+            element={<ProductPage id={15} />}
+          />
+          <Route path="product/tank_skull" element={<ProductPage id={16} />} />
           <Route
             path="product/spirit_of_lonely_places"
-            element={<ProductPage />}
+            element={<ProductPage id={17} />}
           />
-          <Route path="product/tribe_skull_2" element={<ProductPage />} />
-          <Route path="product/evil_totem" element={<ProductPage />} />
-          <Route path="product/tribe_skull_1" element={<ProductPage />} />
-          <Route path="product/octopus_skull" element={<ProductPage />} />
-          <Route path="product/win_or_die" element={<ProductPage />} />
-          <Route path="product/skull_wineglass" element={<ProductPage />} />
-          <Route path="product/satan_in_hell" element={<ProductPage />} />
-          <Route path="product/dying_space" element={<ProductPage />} />
-          <Route path="product/graveyard_gate" element={<ProductPage />} />
+          <Route
+            path="product/tribe_skull_2"
+            element={<ProductPage id={18} />}
+          />
+          <Route path="product/evil_totem" element={<ProductPage id={19} />} />
+          <Route
+            path="product/tribe_skull_1"
+            element={<ProductPage id={20} />}
+          />
+          <Route
+            path="product/octopus_skull"
+            element={<ProductPage id={21} />}
+          />
+          <Route path="product/win_or_die" element={<ProductPage id={22} />} />
+          <Route
+            path="product/skull_wineglass"
+            element={<ProductPage id={23} />}
+          />
+          <Route
+            path="product/satan_in_hell"
+            element={<ProductPage id={24} />}
+          />
+          <Route path="product/dying_space" element={<ProductPage id={25} />} />
+          <Route
+            path="product/graveyard_gate"
+            element={<ProductPage id={26} />}
+          />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

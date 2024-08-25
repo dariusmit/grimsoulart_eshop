@@ -1,29 +1,17 @@
 import { Link } from "react-router-dom";
+import productList from "../data/productList";
 
 interface Props {
-  title: string;
-  price: number;
-  imgUrl: string;
-  productUrl: string;
-  buyLink?: string;
-  marginValues?: string;
+  id: number;
 }
 
-function ProductCard({
-  title,
-  price,
-  imgUrl,
-  productUrl,
-  buyLink,
-  marginValues,
-}: Props) {
-  const pathname = productUrl;
+function ProductCard({ id }: Props) {
   const data = {
-    title: title,
-    amount: price,
-    imgUrl: imgUrl,
-    buyLink: buyLink,
+    id: id,
   };
+
+  const specificProduct = productList.find((product) => product.id === id);
+
   return (
     <>
       <div
@@ -32,10 +20,10 @@ function ProductCard({
           "min-[1024px]:w-[31vw] min-[1024px]:h-auto " +
           "min-[1024px]:hover:scale-[104%] min-[1024px]:transition min-[1024px]:p-0 min-[1024px]:ease-in-out min-[1024px]:duration-300 " +
           "min-[1440px]:max-w-[32%] " +
-          marginValues
+          specificProduct!!.marginValues
         }
       >
-        <Link to={pathname} state={data}>
+        <Link to={specificProduct!!.productUrl} state={data}>
           <div
             className="w-full h-full
           min-[1024px]:h-[31vw]
@@ -43,12 +31,12 @@ function ProductCard({
           >
             <img
               className="object-cover blur-[0.3px] w-full h-[95.73vw] min-[1024px]:blur-[0.6px] min-[1024px]:h-full"
-              src={imgUrl}
+              src={specificProduct!!.imgUrl}
             ></img>
           </div>
           <div className="text-gray-800 bg-gray-100 p-6">
-            <p>{title}</p>
-            <p>{price} EUR</p>
+            <p>{specificProduct!!.title}</p>
+            <p>{specificProduct!!.price} EUR</p>
           </div>
         </Link>
       </div>
