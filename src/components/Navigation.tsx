@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 
 interface Props {
   homeLink: string;
+  commissionsLink: string;
   aboutLink: string;
   contactLink: string;
   disableMobileMenu: (status: boolean) => void;
@@ -9,6 +10,7 @@ interface Props {
 
 function Navigation({
   homeLink,
+  commissionsLink,
   aboutLink,
   contactLink,
   disableMobileMenu,
@@ -27,6 +29,16 @@ function Navigation({
       </Link>
       <Link
         className={
+          "border-b border-black hover:border-white hover:border-b pb-[1px] " +
+          commissionsLink
+        }
+        to="/commissions"
+        onClick={() => disableMobileMenu(true)}
+      >
+        Commissions
+      </Link>
+      <Link
+        className={
           "border-b border-black hover:border-white pb-[1px]" + " " + aboutLink
         }
         to="/about"
@@ -36,7 +48,7 @@ function Navigation({
       </Link>
       <Link
         className={
-          "border-b border-black hover:border-white pb-[1px]" +
+          "border-b border-black hover:border-white pb-[1px] !mr-0" +
           " " +
           contactLink
         }
@@ -45,14 +57,6 @@ function Navigation({
       >
         Contact
       </Link>
-      <a
-        className="!mr-0 hover:border-b pb-[1px]"
-        href="https://www.etsy.com/shop/GrimsoulArt"
-        target="_blank"
-        onClick={() => disableMobileMenu(true)}
-      >
-        T-Shirts on Etsy
-      </a>
     </>
   );
 }

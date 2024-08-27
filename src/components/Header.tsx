@@ -5,6 +5,7 @@ import Navigation from "./Navigation";
 
 function Header() {
   let [homeLink, setHomeLink] = useState("");
+  let [commissionsLink, setCommissionsLink] = useState("");
   let [aboutLink, setAboutLink] = useState("");
   let [contactLink, setContactLink] = useState("");
 
@@ -14,19 +15,29 @@ function Header() {
     if (location.pathname == "/") {
       setHomeLink("border-white");
       setAboutLink("");
+      setCommissionsLink("");
       setContactLink("");
     } else if (location.pathname == "/about") {
       setHomeLink("");
+      setCommissionsLink("");
       setAboutLink("border-white");
       setContactLink("");
     } else if (location.pathname == "/contact") {
       setHomeLink("");
       setAboutLink("");
+      setCommissionsLink("");
       setContactLink("border-white");
+    } else if (location.pathname == "/commissions") {
+      setHomeLink("");
+      setCommissionsLink("border-white");
+      setAboutLink("");
+      setCommissionsLink("");
+      setContactLink("");
     } else if (location.pathname.startsWith("/product")) {
       setHomeLink("border-white");
       setAboutLink("");
       setContactLink("");
+      setCommissionsLink("");
     }
   }, [location.pathname]);
 
@@ -78,6 +89,7 @@ function Header() {
           <div className="bg-black fixed z-[99] [&>a]:py-8 [&>a]:px-14 [&>a]:min-[1440px]:p-0 top-0 pt-4 pb-12 [&>a]:border-none [&>a]:pb-0 left-0 flex flex-col">
             <Navigation
               homeLink={homeLink}
+              commissionsLink={commissionsLink}
               aboutLink={aboutLink}
               contactLink={contactLink}
               disableMobileMenu={disableMobileMenu}
@@ -88,6 +100,7 @@ function Header() {
         <div className="hidden min-[1024px]:flex min-[1024px]:[&>a]:mr-[20px]">
           <Navigation
             homeLink={homeLink}
+            commissionsLink={commissionsLink}
             aboutLink={aboutLink}
             contactLink={contactLink}
             disableMobileMenu={disableMobileMenu}
