@@ -32,7 +32,7 @@ function CommissionsCard({ id }: Props) {
               src={specificCommission!!.imgUrl}
             ></img>
           </div>
-          <div className="text-gray-800 bg-gray-100 p-6">
+          <div className="text-gray-800 bg-gray-100 min-h-[96px] p-6">
             <p>{specificCommission!!.title}</p>
           </div>
         </Link>

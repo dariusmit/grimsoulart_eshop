@@ -7,9 +7,11 @@ interface Props {
 function ReviewCard({ title, stars, children }: Props) {
   return (
     <>
-      <p>{title}</p>
-      <p>{stars}</p>
-      <p>{children}</p>
+      <div className="mb-10">
+        <p className="font-bold mb-1">{title}</p>
+        <p className="mb-3">{stars}</p>
+        <p className="max-w-[90%]">{children}</p>
+      </div>
     </>
   );
 }
