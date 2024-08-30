@@ -1,13 +1,20 @@
 import CommissionsCard from "./CommissionsCard";
 import ReviewCard from "./ReviewCard";
-import LightGallery from "lightgallery/react";
+import LightGalleryComponent from "lightgallery/react";
 import "lightgallery/css/lightgallery.css";
-import "lightgallery/css/lg-zoom.css";
 import "lightgallery/css/lg-thumbnail.css";
 import lgThumbnail from "lightgallery/plugins/thumbnail";
-import lgZoom from "lightgallery/plugins/zoom";
+import commissionsList from "../data/commissionsList";
+import type { LightGallery } from "lightgallery/lightgallery";
+import { useRef } from "react";
 
 function CommissionsPage() {
+  const lightboxRef = useRef<LightGallery | null>(null);
+
+  function openLightbox(id: number) {
+    lightboxRef.current?.openGallery(id - 1);
+  }
+
   return (
     <>
       <div className="flex flex-col items-center">
@@ -16,18 +23,35 @@ function CommissionsPage() {
             min-[1024px]:flex min-[1024px]:flex-wrap min-[1024px]:mx-auto min-[1024px]:justify-center
             min-[1440px]:max-w-[1110px]"
         >
-          <CommissionsCard id={1} />
-          <CommissionsCard id={2} />
-          <CommissionsCard id={3} />
-          <CommissionsCard id={4} />
-          <CommissionsCard id={5} />
-          <CommissionsCard id={6} />
-          <CommissionsCard id={7} />
-          <CommissionsCard id={8} />
-          <CommissionsCard id={9} />
-          <CommissionsCard id={10} />
-          <CommissionsCard id={11} />
-          <CommissionsCard id={12} />
+          {commissionsList.map((commission) => {
+            return (
+              <CommissionsCard
+                id={commission.id}
+                key={commission.id}
+                openLightbox={() => openLightbox(commission.id)}
+              />
+            );
+          })}
+
+          <LightGalleryComponent
+            onInit={(ref) => {
+              if (ref) {
+                lightboxRef.current = ref.instance;
+              }
+            }}
+            speed={500}
+            download={false}
+            elementClassNames="lightgallery-img"
+            plugins={[lgThumbnail]}
+            dynamic
+            dynamicEl={commissionsList.map((commission) => {
+              return {
+                src: commission.imgUrl,
+                thumb: commission.imgThumb,
+                subHtml: commission.imgDesc,
+              };
+            })}
+          />
           <div className="flex p-2 pt-16">
             <div className="w-1/2">
               <ReviewCard title="Three Queens Spice Co." stars="⭐⭐⭐⭐⭐">
@@ -72,11 +96,6 @@ function CommissionsPage() {
               />
             </div>
           </div>
-          <LightGallery speed={500} plugins={[lgThumbnail, lgZoom]}>
-            <img src="../../images/commissions/agoge.png"></img>
-            <img src="../../images/commissions/bodyache.png"></img>
-            <CommissionsCard id={12} />
-          </LightGallery>
         </div>
       </div>
     </>
