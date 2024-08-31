@@ -2,8 +2,6 @@ import CommissionsCard from "./CommissionsCard";
 import ReviewCard from "./ReviewCard";
 import LightGalleryComponent from "lightgallery/react";
 import "lightgallery/css/lightgallery.css";
-import "lightgallery/css/lg-thumbnail.css";
-import lgThumbnail from "lightgallery/plugins/thumbnail";
 import commissionsList from "../data/commissionsList";
 import type { LightGallery } from "lightgallery/lightgallery";
 import { useRef } from "react";
@@ -42,11 +40,10 @@ function CommissionsPage() {
             speed={500}
             download={false}
             elementClassNames="lightgallery-img"
-            plugins={[lgThumbnail]}
             dynamic
             dynamicEl={commissionsList.map((commission) => {
               return {
-                src: commission.imgFullD,
+                src: commission.imgLightbox,
                 thumb: commission.imgThumb,
                 subHtml: commission.title,
               };

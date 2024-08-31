@@ -7,9 +7,7 @@ const Layout = () => {
   let [toTopVisibility, setToTopVisibility] = useState(false);
 
   window.onscroll = () => {
-    console.log("skrolinam");
     if (window.scrollY == 0) {
-      console.log("pasiektas virsus");
       setToTopVisibility(false);
     } else {
       setToTopVisibility(true);

@@ -85,7 +85,7 @@ function Header() {
           </button>
         </div>
         {mobileMenuVisibility ? (
-          <div className="bg-black fixed z-[99] [&>a]:py-8 [&>a]:px-14 [&>a]:min-[1440px]:p-0 top-0 pt-4 pb-12 [&>a]:border-none [&>a]:pb-0 left-0 flex flex-col">
+          <div className="bg-black fixed text-xl w-full z-[99] [&>a]:py-10 [&>a]:px-16 [&>a]:min-[1440px]:p-0 top-0 pt-4 pb-12 [&>a]:border-none [&>a]:pb-0 left-0 flex flex-col">
             <Navigation
               homeLink={homeLink}
               commissionsLink={commissionsLink}
@@ -93,7 +93,13 @@ function Header() {
               contactLink={contactLink}
               disableMobileMenu={disableMobileMenu}
             />
-            <div className="fixed top-0 left-0 w-full h-screen z-[-99] bg-black opacity-75"></div>
+            <div
+              onClick={() => {
+                setMobileMenuVisibility(false);
+                setMobileMenuPosition("absolute");
+              }}
+              className="fixed top-0 left-0 w-full h-screen z-[-99] bg-black opacity-75"
+            ></div>
           </div>
         ) : null}
         <div className="hidden min-[1024px]:flex min-[1024px]:[&>a]:mr-[20px]">

@@ -17,3 +17,11 @@ body {
   box-sizing: border-box;
   font-family: "Assistant";
 }
+
+.lg-sub-html {
+  margin-bottom: 40px;
+}
+
+.lg-img-wrap {
+  padding: 20px;
+}
