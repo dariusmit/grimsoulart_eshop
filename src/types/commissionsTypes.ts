@@ -3,7 +3,8 @@ interface commissionsTypes {
     title: string;
     imgUrl: string;
     imgThumb: string;
-    imgDesc: string;
+    imgFullD: string;
+    imgFullM: string;
     marginValues?: string;
 }
 

@@ -10,7 +10,7 @@ function ReviewCard({ title, stars, children }: Props) {
       <div className="mb-10">
         <p className="font-bold mb-1">{title}</p>
         <p className="mb-3">{stars}</p>
-        <p className="max-w-[90%]">{children}</p>
+        <p className="min-[1024px]:max-w-[90%]">{children}</p>
       </div>
     </>
   );

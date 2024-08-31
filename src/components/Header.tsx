@@ -31,7 +31,6 @@ function Header() {
       setHomeLink("");
       setCommissionsLink("border-white");
       setAboutLink("");
-      setCommissionsLink("");
       setContactLink("");
     } else if (location.pathname.startsWith("/product")) {
       setHomeLink("border-white");

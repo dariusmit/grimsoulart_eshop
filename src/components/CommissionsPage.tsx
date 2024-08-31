@@ -3,7 +3,9 @@ import ReviewCard from "./ReviewCard";
 import LightGalleryComponent from "lightgallery/react";
 import "lightgallery/css/lightgallery.css";
 import "lightgallery/css/lg-thumbnail.css";
+import "lightgallery/css/lg-zoom.css";
 import lgThumbnail from "lightgallery/plugins/thumbnail";
+import lgZoom from "lightgallery/plugins/zoom";
 import commissionsList from "../data/commissionsList";
 import type { LightGallery } from "lightgallery/lightgallery";
 import { useRef } from "react";
@@ -42,18 +44,21 @@ function CommissionsPage() {
             speed={500}
             download={false}
             elementClassNames="lightgallery-img"
-            plugins={[lgThumbnail]}
+            plugins={[lgThumbnail, lgZoom]}
             dynamic
             dynamicEl={commissionsList.map((commission) => {
               return {
-                src: commission.imgUrl,
+                src:
+                  window.innerWidth > 768
+                    ? commission.imgFullD
+                    : commission.imgFullM,
                 thumb: commission.imgThumb,
-                subHtml: commission.imgDesc,
+                subHtml: commission.title,
               };
             })}
           />
-          <div className="flex p-2 pt-16">
-            <div className="w-1/2">
+          <div className="flex flex-col p-2 min-[1024px]:flex-row min-[1024px]:mt-12">
+            <div className="text-center min-[1024px]:text-left w-full pt-8 min-[1024px]:w-1/2 min-[1024px]:pt-0">
               <ReviewCard title="Three Queens Spice Co." stars="⭐⭐⭐⭐⭐">
                 I have worked with Darius twice in order to obtain some artwork
                 for my business. Both times he has provided exceptional work,
@@ -89,7 +94,7 @@ function CommissionsPage() {
                 really happy with the results. Thank you!
               </ReviewCard>
             </div>
-            <div className="w-1/2">
+            <div className="w-full pt-8 min-[1024px]:w-1/2 min-[1024px]:pt-0">
               <img
                 className="w-full h-auto"
                 src="../../images/commissions/clients.png"
