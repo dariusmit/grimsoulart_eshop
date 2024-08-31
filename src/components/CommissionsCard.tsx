@@ -28,7 +28,7 @@ function CommissionsCard({ id, openLightbox }: Props) {
           min-[1440px]:max-h-[360px]"
         >
           <img
-            className="object-cover blur-[0.3px] w-full h-[95.73vw] min-[1024px]:blur-[0.6px] min-[1024px]:h-full"
+            className="object-cover w-full h-[95.73vw] min-[1024px]:blur-[0.6px] min-[1024px]:h-full"
             src={specificCommission!!.imgUrl}
           ></img>
         </div>

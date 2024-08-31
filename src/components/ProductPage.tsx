@@ -20,7 +20,7 @@ function ProductPage({ id }: Props) {
       >
         <div className="min-[1024px]:w-[60%] min-[1024px]:mr-12">
           <img
-            className="w-full blur-[0.3px] min-[1024px]:w-full min-[1024px]:blur-[0.5px] mb-4 h-auto"
+            className="w-full min-[1024px]:w-full min-[1024px]:blur-[0.5px] mb-4 h-auto"
             //Neatsidaro page jeigu tiesiogiai suvedi produkto nuoroda, itariu nes ne per indeks faila einam.
             //Dar buna neuzloadintas home page ir neturi sis kompnentas reiksmes del to
             src={specificProduct!!.imgUrl}

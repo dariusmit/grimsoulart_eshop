@@ -3,9 +3,7 @@ import ReviewCard from "./ReviewCard";
 import LightGalleryComponent from "lightgallery/react";
 import "lightgallery/css/lightgallery.css";
 import "lightgallery/css/lg-thumbnail.css";
-import "lightgallery/css/lg-zoom.css";
 import lgThumbnail from "lightgallery/plugins/thumbnail";
-import lgZoom from "lightgallery/plugins/zoom";
 import commissionsList from "../data/commissionsList";
 import type { LightGallery } from "lightgallery/lightgallery";
 import { useRef } from "react";
@@ -44,14 +42,11 @@ function CommissionsPage() {
             speed={500}
             download={false}
             elementClassNames="lightgallery-img"
-            plugins={[lgThumbnail, lgZoom]}
+            plugins={[lgThumbnail]}
             dynamic
             dynamicEl={commissionsList.map((commission) => {
               return {
-                src:
-                  window.innerWidth > 768
-                    ? commission.imgFullD
-                    : commission.imgFullM,
+                src: commission.imgFullD,
                 thumb: commission.imgThumb,
                 subHtml: commission.title,
               };
