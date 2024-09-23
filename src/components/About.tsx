@@ -1,4 +1,25 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 const About = () => {
+  const api_url =
+    "https://www.admin.grimsoulart.com/wp-json/wp/v2/pages?_fields=id,content,title";
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  let [title, changeTitle] = useState("");
+  let [body, changeBody] = useState("");
+
+  async function getData() {
+    let { data } = await axios.get(api_url);
+    data[0].content.rendered = data[0].content.rendered.replace("<p>", "");
+    data[0].content.rendered = data[0].content.rendered.replace("</p>", "");
+    changeTitle(data[0].title.rendered);
+    changeBody(data[0].content.rendered);
+  }
+
   return (
     <>
       <div
@@ -11,21 +32,9 @@ const About = () => {
           <img src="../../images/profile.jpg" />
         </div>
         <div className="flex flex-col justify-center min-[1024px]:w-[70%]">
-          <h1 className="text-4xl mb-4 text-gray-800">
-            Grimsoul Art / Darius Molotokas
-          </h1>
+          <h1 className="text-4xl mb-4 text-gray-800">{title}</h1>
           <p className="leading-relaxed tracking-wide text-gray-500 max-w-[600px]">
-            Grimsoul Art – my pseudonym, my real name is Darius Molotokas and I
-            am Dark / Skull artist from Lithuania. I express my own passions for
-            the darker side of the world and pen and ink is what shapes it. I am
-            heavily inspired by the heavy metal, rock and goth music, horror and
-            other dark, deep, twisted films or books. I take inspiration from
-            such great artists as Mark Riddick, Chris Moyen, Blial Cabal,
-            Defame, Godmachine also the bands Motorhead, Metallica, AC/DC, Black
-            Sabbath, Darkthrone, Archgoat, Acid Witch, Gaahls Wyrd, Lebanon
-            Hanover, Joy Division, She Past Away and many more are all idols of
-            mine. In my free time I do like to play electric guitar, ride a bike
-            or indulge in a great movie or book.
+            {body}
           </p>
         </div>
       </div>

@@ -1,13 +1,26 @@
 import Collapsible from "./Collapsible";
-import { useEffect } from "react";
-import productList from "../data/productList";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-interface Props {
-  id: number;
-}
+function ProductPage() {
+  const api_url =
+    "https://www.admin.grimsoulart.com/wp-json/wp/v2/products?acf_format=standard&_fields=id,title,acf&per_page=30";
 
-function ProductPage({ id }: Props) {
-  const specificProduct = productList.find((product) => product.id === id);
+  let [productData, UpdateProductData]: any = useState([]);
+  const { productSlug } = useParams();
+  useEffect(() => {
+    getData();
+    console.log(productSlug);
+  }, []);
+
+  const location = useLocation();
+
+  async function getData() {
+    const req = await fetch(api_url);
+    const product = await req.json();
+    UpdateProductData(product);
+  }
 
   useEffect(() => window.scrollTo(0, 0), []);
 
@@ -19,42 +32,120 @@ function ProductPage({ id }: Props) {
       min-[1440px]:w-[1110px]"
       >
         <div className="min-[1024px]:w-[60%] min-[1024px]:mr-12">
-          <img
-            className="w-full min-[1024px]:w-full min-[1024px]:blur-[0.5px] mb-4 h-auto"
-            //Neatsidaro page jeigu tiesiogiai suvedi produkto nuoroda, itariu nes ne per indeks faila einam.
-            //Dar buna neuzloadintas home page ir neturi sis kompnentas reiksmes del to
-            src={specificProduct!!.imgUrl}
-          ></img>
+          {productData.map((product: any) =>
+            product.acf.slug === location.pathname &&
+            product.acf.sold_status === false ? (
+              <img
+                key={product.id}
+                className="min-[1024px]:w-[100%] min-[1024px]:mr-12"
+                src={product.acf.product_image}
+              />
+            ) : product.acf.slug === location.pathname &&
+              product.acf.sold_status === true ? (
+              <div
+                className="w-full h-full relative
+                  min-[1024px]:h-auto
+                  "
+              >
+                <img
+                  key={product.id}
+                  className="min-[1024px]:w-[100%] opacity-60 min-[1024px]:mr-12"
+                  src={product.acf.product_image}
+                />
+                <>
+                  <div className=" absolute top-0 left-0 w-full h-full bg-gray-400 opacity-50"></div>
+                  <p className="flex text-white font-bold text-6xl absolute top-0 left-0 w-full h-full justify-center items-center">
+                    SOLD
+                  </p>
+                </>
+              </div>
+            ) : null
+          )}
         </div>
         <div className="w-full min-[1024px]:w-[40%]">
-          <h1 className="text-4xl text-gray-800 mb-4">
-            {specificProduct!!.title}
+          <h1 className="text-4xl text-gray-800 mb-4 mt-3 min-[1024px]:mt-0">
+            {productData.map((product: any) =>
+              product.acf.slug === location.pathname
+                ? product.title.rendered
+                : null
+            )}
           </h1>
           <h3 className="text-xl text-gray-700 mb-4">
-            {specificProduct!!.price} EUR
+            {productData.map((product: any) => {
+              if (
+                product.acf.slug === location.pathname &&
+                product.acf.sold_status === false
+              ) {
+                return product.acf.price + " EUR";
+              } else if (
+                product.acf.slug === location.pathname &&
+                product.acf.sold_status === true
+              ) {
+                return null;
+              }
+            })}
           </h3>
           <div className="flex flex-col items-start w-full">
-            <a className="w-full" href={specificProduct!!.buyLink}>
-              <button className="w-full min-[1024px]:w-full px-4 py-2 border hover:scale-105 transition ease-in-out duration-300 bg-black border-black text-white mb-4">
-                Buy it Now
-              </button>
-            </a>
+            {productData.map((product: any) => {
+              if (
+                product.acf.slug === location.pathname &&
+                product.acf.sold_status === false
+              ) {
+                return (
+                  <a
+                    key={product.id}
+                    className="w-full"
+                    href={product.acf.buy_link}
+                  >
+                    <button className="w-full min-[1024px]:w-full px-4 py-2 border hover:scale-105 transition ease-in-out duration-300 bg-black border-black text-white mb-4">
+                      Buy it Now
+                    </button>
+                  </a>
+                );
+              } else if (
+                product.acf.slug === location.pathname &&
+                product.acf.sold_status === true
+              ) {
+                return (
+                  <button
+                    key={product.id}
+                    className="w-full min-[1024px]:w-full px-4 py-2 pointer-events-none border bg-gray-400 border-gray-400 text-white mb-4"
+                  >
+                    No longer available
+                  </button>
+                );
+              }
+            })}
           </div>
           <div className="mb-8">
-            <p>
-              🔒Pressing Buy will redirect you to securely pay with{" "}
-              <b>
-                <a
-                  className="hover:underline"
-                  href="https://stripe.com/en-lt"
-                  target="_blank"
-                >
-                  Stripe
-                </a>
-              </b>
-            </p>
+            {productData.map((product: any) => {
+              if (
+                product.acf.slug === location.pathname &&
+                product.acf.sold_status === false
+              ) {
+                return (
+                  <p key={product.id}>
+                    🔒Pressing Buy will redirect you to securely pay with{" "}
+                    <b>
+                      <a
+                        className="hover:underline"
+                        href="https://stripe.com/en-lt"
+                        target="_blank"
+                      >
+                        Stripe
+                      </a>
+                    </b>
+                  </p>
+                );
+              } else if (
+                product.acf.slug === location.pathname &&
+                product.acf.sold_status === true
+              ) {
+                return null;
+              }
+            })}
             <br />
-            <p>✳️ THIS IS INSTANT DIGITAL ART DOWNLOAD ✳️</p>
+            <p>✳️ THIS IS INSTANT DIGITAL ART DOWNLOAD</p>
             <br />
             <p>
               👕 💿 💸 Use it for your Heavy Metal Band merch, CD/LP cover,
