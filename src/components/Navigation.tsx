@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 
 interface Props {
   homeLink: string;
@@ -16,8 +15,6 @@ function Navigation({
   contactLink,
   disableMobileMenu,
 }: Props) {
-  const location = useLocation();
-
   return (
     <>
       <Link

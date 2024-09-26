@@ -8,6 +8,7 @@ function ProductPage() {
 
   let [productData, UpdateProductData]: any = useState([]);
   useEffect(() => {
+    window.scrollTo(0, 0);
     getData();
   }, []);
 
@@ -18,8 +19,6 @@ function ProductPage() {
     const product = await req.json();
     UpdateProductData(product);
   }
-
-  useEffect(() => window.scrollTo(0, 0), []);
 
   return (
     <>
@@ -40,12 +39,12 @@ function ProductPage() {
             ) : product.acf.slug === location.pathname &&
               product.acf.sold_status === true ? (
               <div
+                key={product.id}
                 className="w-full h-full relative
                   min-[1024px]:h-auto
                   "
               >
                 <img
-                  key={product.id}
                   className="min-[1024px]:w-[100%] opacity-60 min-[1024px]:mr-12"
                   src={product.acf.product_image}
                 />
@@ -89,15 +88,17 @@ function ProductPage() {
                 product.acf.sold_status === false
               ) {
                 return (
-                  <a
-                    key={product.id}
-                    className="w-full"
-                    href={product.acf.buy_link}
-                  >
-                    <button className="w-full min-[1024px]:w-full px-4 py-2 border hover:scale-105 transition ease-in-out duration-300 bg-black border-black text-white mb-4">
-                      Buy it Now
-                    </button>
-                  </a>
+                  <div key={product.id}>
+                    <a
+                      key={product.id}
+                      className="w-full"
+                      href={product.acf.buy_link}
+                    >
+                      <button className="w-full min-[1024px]:w-full px-4 py-2 border hover:scale-105 transition ease-in-out duration-300 bg-black border-black text-white mb-4">
+                        Buy it Now
+                      </button>
+                    </a>
+                  </div>
                 );
               } else if (
                 product.acf.slug === location.pathname &&
