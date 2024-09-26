@@ -1,17 +1,14 @@
 import Collapsible from "./Collapsible";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useParams } from "react-router-dom";
 
 function ProductPage() {
   const api_url =
     "https://www.admin.grimsoulart.com/wp-json/wp/v2/products?acf_format=standard&_fields=id,title,acf&per_page=30";
 
   let [productData, UpdateProductData]: any = useState([]);
-  const { productSlug } = useParams();
   useEffect(() => {
     getData();
-    console.log(productSlug);
   }, []);
 
   const location = useLocation();

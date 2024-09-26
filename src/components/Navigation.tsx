@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 interface Props {
   homeLink: string;
@@ -15,6 +16,8 @@ function Navigation({
   contactLink,
   disableMobileMenu,
 }: Props) {
+  const location = useLocation();
+
   return (
     <>
       <Link
@@ -22,7 +25,7 @@ function Navigation({
           "border-b border-black hover:border-white hover:border-b pb-[1px] " +
           homeLink
         }
-        to="/"
+        to={"/?p=1"}
         onClick={() => disableMobileMenu(true)}
       >
         Art for Sale

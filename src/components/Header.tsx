@@ -66,7 +66,7 @@ function Header() {
         className="flex flex-col-reverse text-white items-center justify-center w-full bg-[black]
         min-[1024px]:p-[30px] min-[1024px]:flex-col min-[1024px]:mb-0"
       >
-        <Link to="/">
+        <Link to={"/?p=1"}>
           <img
             className="my-10 w-[250px] h-auto min-[1024px]:hover:scale-[104%] min-[1024px]:transition  min-[1024px]:ease-in-out min-[1024px]:duration-300 min-[1024px]:mb-6 min-[1024px]:mt-0"
             src="../../images/logo.png"
