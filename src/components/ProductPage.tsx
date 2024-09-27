@@ -88,13 +88,13 @@ function ProductPage() {
                 product.acf.sold_status === false
               ) {
                 return (
-                  <div key={product.id}>
+                  <div className="w-full" key={product.id}>
                     <a
                       key={product.id}
                       className="w-full"
                       href={product.acf.buy_link}
                     >
-                      <button className="w-full min-[1024px]:w-full px-4 py-2 border hover:scale-105 transition ease-in-out duration-300 bg-black border-black text-white mb-4">
+                      <button className="w-full px-4 py-2 border hover:scale-105 transition ease-in-out duration-300 bg-black border-black text-white mb-4">
                         Buy it Now
                       </button>
                     </a>

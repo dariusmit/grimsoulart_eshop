@@ -19,7 +19,7 @@ function Navigation({
     <>
       <Link
         className={
-          "border-b border-black hover:border-white hover:border-b pb-[1px] " +
+          "border-b border-black hover:border-white hover:border-b pb-1 " +
           homeLink
         }
         to={"/?p=1"}
@@ -29,7 +29,7 @@ function Navigation({
       </Link>
       <Link
         className={
-          "border-b border-black hover:border-white hover:border-b pb-[1px] " +
+          "border-b border-black hover:border-white hover:border-b pb-1 " +
           commissionsLink
         }
         to="/commissions"
@@ -39,7 +39,7 @@ function Navigation({
       </Link>
       <Link
         className={
-          "border-b border-black hover:border-white pb-[1px]" + " " + aboutLink
+          "border-b border-black hover:border-white pb-1" + " " + aboutLink
         }
         to="/about"
         onClick={() => disableMobileMenu(true)}
@@ -48,7 +48,7 @@ function Navigation({
       </Link>
       <Link
         className={
-          "border-b border-black hover:border-white pb-[1px] !mr-0" +
+          "border-b border-black hover:border-white pb-1 !mr-0" +
           " " +
           contactLink
         }
