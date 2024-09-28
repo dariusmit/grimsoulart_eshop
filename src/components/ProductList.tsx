@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Button from "./Button";
+import LoadingAnimatedItem from "./LoadingAnimatedItem";
 
 function ProductList() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -9,6 +10,8 @@ function ProductList() {
   let [pagesCount, setPagesCount] = useState<number>(0);
   let [itemsCount, setItemsCount] = useState<number>(0);
   let [productData, UpdateProductData] = useState([]);
+
+  let [isLoading, UpdateLoadingStatus] = useState(true);
 
   // Read current page from search params, fallback to storage
   const currentPage = Number(searchParams.get("p")) || getCurrentPage();
@@ -53,17 +56,19 @@ function ProductList() {
   }
 
   async function getData(currentPage: number) {
+    UpdateLoadingStatus(true);
     const api_url = `https://www.admin.grimsoulart.com/wp-json/wp/v2/products?acf_format=standard&_fields=id,title,acf&per_page=9&page=${currentPage}`;
     const req = await fetch(api_url);
     const products = await req.json();
     UpdateProductData(products);
+    UpdateLoadingStatus(false);
   }
 
   return (
     <>
       {productData && productData.length > 0 ? (
         <>
-          <div className="flex w-full justify-between items-center mb-4">
+          <div className="flex flex-col min-[1024px]:flex-row w-full justify-between items-center mb-4">
             <div className="flex">
               <div className="mr-2">
                 <Button onClick={prevPage} condition={currentPage === 1}>
@@ -126,7 +131,7 @@ function ProductList() {
               );
             })}
           </div>
-          <div className="flex w-full justify-between items-center mt-4">
+          <div className="flex flex-col min-[1024px]:flex-row w-full justify-between items-center mt-4">
             <div className="flex">
               <div className="mr-2">
                 <Button onClick={prevPage} condition={currentPage === 1}>
@@ -150,14 +155,20 @@ function ProductList() {
         </>
       ) : (
         <div className="w-full flex flex-col justify-center items-center p-8">
-          <p className="text-2xl">Page not found.</p>
-          <Link
-            className="bg-black text-center text-white min-[1024px]:hover:scale-105 w-full min-[1024px]:transition
-          min-[1024px]:ease-in-out min-[1024px]:duration-300 px-4 py-2 mt-4 min-[1024px]:w-[226px]"
-            to="/?p=1"
-          >
-            Go back to 1st page
-          </Link>
+          {isLoading ? (
+            <LoadingAnimatedItem />
+          ) : (
+            <>
+              <p className="text-2xl">Page not found.</p>
+              <Link
+                className="bg-black text-center text-white min-[1024px]:hover:scale-105 w-full min-[1024px]:transition
+            min-[1024px]:ease-in-out min-[1024px]:duration-300 px-4 py-2 mt-4 min-[1024px]:w-[226px]"
+                to="/?p=1"
+              >
+                Go back to 1st page
+              </Link>
+            </>
+          )}
         </div>
       )}
     </>
