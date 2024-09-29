@@ -70,12 +70,12 @@ function ProductList() {
         <>
           <div className="flex flex-col min-[1024px]:flex-row w-full justify-between items-center mb-4">
             <div className="flex">
-              <div className="mr-2">
+              <div className="px-4 pb-4 min-[1024px]:p-0 min-[1024px]:mr-3">
                 <Button onClick={prevPage} condition={currentPage === 1}>
                   Prev page
                 </Button>
               </div>
-              <div>
+              <div className="px-4 pb-4 min-[1024px]:p-0">
                 <Button
                   onClick={nextPage}
                   condition={currentPage === pagesCount}
@@ -133,12 +133,12 @@ function ProductList() {
           </div>
           <div className="flex flex-col min-[1024px]:flex-row w-full justify-between items-center mt-4">
             <div className="flex">
-              <div className="mr-2">
+              <div className="px-4 pb-4 min-[1024px]:p-0 min-[1024px]:mr-3">
                 <Button onClick={prevPage} condition={currentPage === 1}>
                   Prev page
                 </Button>
               </div>
-              <div>
+              <div className="px-4 pb-4 min-[1024px]:p-0">
                 <Button
                   onClick={nextPage}
                   condition={currentPage === pagesCount}

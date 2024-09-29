@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 const About = () => {
   const api_url =
-    "https://www.admin.grimsoulart.com/wp-json/wp/v2/pages?_fields=id,content,title";
+    "https://www.admin.grimsoulart.com/wp-json/wp/v2/pages/11?_fields=id,content,title";
 
   useEffect(() => {
     getData();
@@ -14,10 +14,10 @@ const About = () => {
 
   async function getData() {
     let { data } = await axios.get(api_url);
-    data[0].content.rendered = data[0].content.rendered.replace("<p>", "");
-    data[0].content.rendered = data[0].content.rendered.replace("</p>", "");
-    changeTitle(data[0].title.rendered);
-    changeBody(data[0].content.rendered);
+    data.content.rendered = data.content.rendered.replace("<p>", "");
+    data.content.rendered = data.content.rendered.replace("</p>", "");
+    changeTitle(data.title.rendered);
+    changeBody(data.content.rendered);
   }
 
   return (
