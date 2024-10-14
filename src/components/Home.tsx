@@ -1,5 +1,4 @@
 import ProductList from "./ProductList";
-import ShoppingCart from "./ShoppingCart";
 
 interface Props {
   quantities: number[];
@@ -8,12 +7,7 @@ interface Props {
   UpdateFullProductsList: React.Dispatch<React.SetStateAction<never[]>>;
 }
 
-const Home = ({
-  quantities,
-  setQuantities,
-  fullProductsList,
-  UpdateFullProductsList,
-}: Props) => {
+const Home = ({ quantities, setQuantities, UpdateFullProductsList }: Props) => {
   function addToCart(id: number) {
     if (!quantities.includes(id)) {
       setQuantities((oldArray) => [...oldArray, id]);
