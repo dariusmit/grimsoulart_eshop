@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 function ProductPage() {
   const api_url =
-    "https://www.admin.grimsoulart.com/wp-json/wp/v2/products?acf_format=standard&_fields=id,title,acf&per_page=30";
+    "https://www.admin.dariusmolotokas.lt/wp-json/wp/v2/products?acf_format=standard&_fields=id,title,acf&per_page=30";
 
   let [productData, UpdateProductData]: any = useState([]);
   useEffect(() => {
@@ -34,7 +34,7 @@ function ProductPage() {
               <img
                 key={product.id}
                 className="min-[1024px]:w-[100%] min-[1024px]:mr-12"
-                src={product.acf.product_image}
+                src={product.acf.image}
               />
             ) : product.acf.slug === location.pathname &&
               product.acf.sold_status === true ? (
@@ -46,7 +46,7 @@ function ProductPage() {
               >
                 <img
                   className="min-[1024px]:w-[100%] opacity-60 min-[1024px]:mr-12"
-                  src={product.acf.product_image}
+                  src={product.acf.image}
                 />
                 <>
                   <div className=" absolute top-0 left-0 w-full h-full bg-gray-400 opacity-50"></div>
@@ -89,11 +89,7 @@ function ProductPage() {
               ) {
                 return (
                   <div className="w-full" key={product.id}>
-                    <a
-                      key={product.id}
-                      className="w-full"
-                      href={product.acf.buy_link}
-                    >
+                    <a key={product.id} className="w-full">
                       <button className="w-full px-4 py-2 border hover:scale-105 transition ease-in-out duration-300 bg-black border-black text-white mb-4">
                         Buy it Now
                       </button>

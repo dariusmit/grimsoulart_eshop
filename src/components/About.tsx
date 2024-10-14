@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 const About = () => {
   const api_url =
-    "https://www.admin.grimsoulart.com/wp-json/wp/v2/pages/11?_fields=id,content,title";
+    "https://www.admin.dariusmolotokas.lt/wp-json/wp/v2/pages/10?_fields=id,content,title";
 
   useEffect(() => {
     getData();

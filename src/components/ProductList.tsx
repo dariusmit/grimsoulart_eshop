@@ -4,12 +4,18 @@ import { useSearchParams } from "react-router-dom";
 import Button from "./Button";
 import LoadingAnimatedItem from "./LoadingAnimatedItem";
 
-function ProductList() {
+interface Props {
+  UpdateFullProductsList: React.Dispatch<React.SetStateAction<never[]>>;
+  addToCart: (id: number) => void;
+}
+
+function ProductList({ UpdateFullProductsList, addToCart }: Props) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   let [pagesCount, setPagesCount] = useState<number>(0);
   let [itemsCount, setItemsCount] = useState<number>(0);
-  let [productData, UpdateProductData] = useState([]);
+
+  let [paginatedProducts, UpdatePaginatedProducts] = useState([]);
 
   let [isLoading, UpdateLoadingStatus] = useState(true);
 
@@ -48,25 +54,26 @@ function ProductList() {
   }
 
   async function calcPagesAndItemsCount() {
-    const api_url = `https://www.admin.grimsoulart.com/wp-json/wp/v2/products?acf_format=standard&_fields=id,title,acf&per_page=99`;
+    const api_url = `https://www.admin.dariusmolotokas.lt/wp-json/wp/v2/products?acf_format=standard&_fields=id,title,acf&per_page=99`;
     const req = await fetch(api_url);
     const products = await req.json();
+    UpdateFullProductsList(products);
     setItemsCount(products.length);
-    setPagesCount(Math.floor(products.length / 9));
+    setPagesCount(Math.ceil(products.length / 9));
   }
 
   async function getData(currentPage: number) {
     UpdateLoadingStatus(true);
-    const api_url = `https://www.admin.grimsoulart.com/wp-json/wp/v2/products?acf_format=standard&_fields=id,title,acf&per_page=9&page=${currentPage}`;
+    const api_url = `https://www.admin.dariusmolotokas.lt/wp-json/wp/v2/products?acf_format=standard&_fields=id,title,acf&per_page=9&page=${currentPage}`;
     const req = await fetch(api_url);
     const products = await req.json();
-    UpdateProductData(products);
+    UpdatePaginatedProducts(products);
     UpdateLoadingStatus(false);
   }
 
   return (
     <>
-      {productData && productData.length > 0 ? (
+      {paginatedProducts && paginatedProducts.length > 0 ? (
         <>
           <div className="flex flex-col min-[1024px]:flex-row w-full justify-between items-center mb-4">
             <div className="flex">
@@ -90,7 +97,7 @@ function ProductList() {
             </p>
           </div>
           <div className="min-[1024px]:grid min-[1024px]:grid-cols-3 min-[1024px]:gap-4">
-            {productData.map((product: any) => {
+            {paginatedProducts.map((product: any) => {
               if (product.acf.sold_status === false) {
               }
               return (
@@ -111,7 +118,7 @@ function ProductList() {
                             ? "object-cover w-full h-[95.73vw] min-[1024px]:blur-[0.6px] min-[1024px]:h-full"
                             : "object-cover w-full opacity-60 h-[95.73vw] min-[1024px]:blur-[0.6px] min-[1024px]:h-full"
                         }
-                        src={product.acf.product_image}
+                        src={product.acf.image}
                       ></img>
                       {product.acf.sold_status === true ? (
                         <>
@@ -127,6 +134,12 @@ function ProductList() {
                       <p>{product.acf.price} EUR</p>
                     </div>
                   </Link>
+                  <button
+                    className="bg-red-400 mt-4"
+                    onClick={() => addToCart(product.id)}
+                  >
+                    Add to cart
+                  </button>
                 </div>
               );
             })}

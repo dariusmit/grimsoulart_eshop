@@ -1,6 +1,25 @@
 import ProductList from "./ProductList";
+import ShoppingCart from "./ShoppingCart";
 
-const Home = () => {
+interface Props {
+  quantities: number[];
+  setQuantities: React.Dispatch<React.SetStateAction<number[]>>;
+  fullProductsList: any;
+  UpdateFullProductsList: React.Dispatch<React.SetStateAction<never[]>>;
+}
+
+const Home = ({
+  quantities,
+  setQuantities,
+  fullProductsList,
+  UpdateFullProductsList,
+}: Props) => {
+  function addToCart(id: number) {
+    if (!quantities.includes(id)) {
+      setQuantities((oldArray) => [...oldArray, id]);
+    }
+  }
+
   return (
     <>
       <div
@@ -8,7 +27,10 @@ const Home = () => {
             min-[1024px]:mx-auto min-[1024px]:justify-between
             min-[1440px]:max-w-[1110px]"
       >
-        <ProductList />
+        <ProductList
+          UpdateFullProductsList={UpdateFullProductsList}
+          addToCart={addToCart}
+        />
       </div>
     </>
   );

@@ -111,6 +111,9 @@ function Header() {
             disableMobileMenu={disableMobileMenu}
           />
         </div>
+        <Link to="/cart" className="bg-orange-500 p-4">
+          Cart
+        </Link>
       </div>
     </>
   );
