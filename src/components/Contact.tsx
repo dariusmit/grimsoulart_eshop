@@ -102,7 +102,7 @@ const Contact = () => {
     <>
       <div
         className="text-gray-800 px-4 mt-8 items-center mb-[11.55rem] flex flex-col justify-center
-      min-[1024px]:p-0 min-[1024px]:w-[900px] min-[1024px]:mx-auto min-[1024px]:mb-auto
+      min-[1024px]:p-0 min-[1024px]:w-[900px] min-[1024px]:mx-auto min-[1024px]:mb-18
       min-[1440px]:w-[1110px] min-[1440px]:mt-16"
       >
         <h1 className="text-4xl mb-8">How can I help?</h1>

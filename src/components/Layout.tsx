@@ -3,7 +3,14 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { useState } from "react";
 
-const Layout = () => {
+interface Props {
+  quantities: number[];
+  fullProductsList: any;
+  total: number;
+  deleteItem: (id: number) => void;
+}
+
+const Layout = ({ quantities, fullProductsList, total, deleteItem }: Props) => {
   let [toTopVisibility, setToTopVisibility] = useState(false);
 
   window.onscroll = () => {
@@ -21,11 +28,16 @@ const Layout = () => {
   return (
     <>
       <div className="flex flex-col min-[1024px]:h-screen">
-        <Header />
+        <Header
+          quantities={quantities}
+          fullProductsList={fullProductsList}
+          total={total}
+          deleteItem={deleteItem}
+        />
         <div>
           {toTopVisibility ? (
             <button
-              className="hidden min-[1440px]:block min-[1440px]:fixed min-[1440px]:bottom-0 min-[1440px]:hover:scale-105 min-[1440px]:transition 
+              className="hidden z-[999] min-[1440px]:block min-[1440px]:fixed min-[1440px]:bottom-0 min-[1440px]:hover:scale-105 min-[1440px]:transition 
             min-[1440px]:ease-in-out min-[1440px]:duration-300 min-[1440px]:opacity-40 min-[1440px]:scroll-smooth min-[1440px]:right-0 min-[1440px]:pr-12 min-[1440px]:pb-40"
               onClick={scrollToTop}
             >
@@ -39,7 +51,9 @@ const Layout = () => {
             </button>
           ) : null}
         </div>
-        <Outlet />
+        <div className="mt-44">
+          <Outlet />
+        </div>
         <Footer />
       </div>
     </>

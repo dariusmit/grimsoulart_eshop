@@ -24,7 +24,7 @@ const About = () => {
     <>
       <div
         className="flex flex-col mt-8 mb-16 px-4
-      min-[1024px]:flex-row min-[1024px]:w-[900px] min-[1024px]:mx-auto min-[1024px]:mb-auto
+      min-[1024px]:flex-row min-[1024px]:w-[900px] min-[1024px]:mx-auto min-[1024px]:mb-40
       min-[1440px]:w-[1110px]
       "
       >

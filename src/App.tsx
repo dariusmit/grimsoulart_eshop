@@ -16,25 +16,52 @@ function App() {
   let [quantities, setQuantities] = useState<number[]>([]);
   const isPaid = true;
 
+  function addToCart(id: number) {
+    if (!quantities.includes(id)) {
+      setQuantities((oldArray) => [...oldArray, id]);
+    }
+  }
+
+  let total: number = 0;
+
+  function deleteItem(id: number) {
+    setQuantities(quantities.filter((item) => item !== id));
+  }
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route
+          path="/"
+          element={
+            <Layout
+              quantities={quantities}
+              fullProductsList={fullProductsList}
+              total={total}
+              deleteItem={deleteItem}
+            />
+          }
+        >
           <Route
             index
             element={
               <Home
-                quantities={quantities}
-                setQuantities={setQuantities}
                 fullProductsList={fullProductsList}
                 UpdateFullProductsList={UpdateFullProductsList}
+                addToCart={addToCart}
+                quantities={quantities}
               />
             }
           />
           <Route path="commissions" element={<CommissionsPage />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
-          <Route path="product/:productSlug" element={<ProductPage />} />
+          <Route
+            path="product/:productSlug"
+            element={
+              <ProductPage addToCart={addToCart} quantities={quantities} />
+            }
+          />
           <Route
             path="cart"
             element={
@@ -42,6 +69,8 @@ function App() {
                 quantities={quantities}
                 setQuantities={setQuantities}
                 fullProductsList={fullProductsList}
+                total={total}
+                deleteItem={deleteItem}
               />
             }
           />
@@ -52,6 +81,8 @@ function App() {
                 quantities={quantities}
                 setQuantities={setQuantities}
                 fullProductsList={fullProductsList}
+                total={total}
+                deleteItem={deleteItem}
               />
             }
           />

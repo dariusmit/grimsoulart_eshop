@@ -3,13 +3,16 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Button from "./Button";
 import LoadingAnimatedItem from "./LoadingAnimatedItem";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface Props {
   UpdateFullProductsList: React.Dispatch<React.SetStateAction<never[]>>;
   addToCart: (id: number) => void;
+  quantities: number[];
 }
 
-function ProductList({ UpdateFullProductsList, addToCart }: Props) {
+function ProductList({ UpdateFullProductsList, addToCart, quantities }: Props) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   let [pagesCount, setPagesCount] = useState<number>(0);
@@ -103,8 +106,8 @@ function ProductList({ UpdateFullProductsList, addToCart }: Props) {
               return (
                 <div
                   key={product.id}
-                  className="w-full h-full pb-4 min-[1024px]:h-auto min-[1024px]:hover:scale-[104%] min-[1024px]:transition
-            min-[1024px]:p-0 min-[1024px]:ease-in-out min-[1024px]:duration-300"
+                  className="w-full h-full pb-4 min-[1024px]:h-auto
+            min-[1024px]:p-0"
                 >
                   <Link to={product.acf.slug}>
                     <div
@@ -129,17 +132,30 @@ function ProductList({ UpdateFullProductsList, addToCart }: Props) {
                         </>
                       ) : null}
                     </div>
-                    <div className="text-gray-800 bg-gray-100 p-6">
+                  </Link>
+                  <div className="text-gray-800 bg-gray-100 flex p-6 items-center justify-between">
+                    <div className="flex flex-col">
                       <p>{product.title.rendered}</p>
                       <p>{product.acf.price} EUR</p>
                     </div>
-                  </Link>
-                  <button
-                    className="bg-red-400 mt-4"
-                    onClick={() => addToCart(product.id)}
-                  >
-                    Add to cart
-                  </button>
+                    {product.acf.sold_status === false ? (
+                      <>
+                        <button
+                          className="bg-black p-2 border-black border-2 text-white hover:bg-white hover:text-black"
+                          onClick={() => {
+                            addToCart(product.id);
+                            if (!quantities.includes(product.id)) {
+                              toast("Item added to cart!");
+                            } else {
+                              toast("Item already in the cart!");
+                            }
+                          }}
+                        >
+                          Add to cart
+                        </button>
+                      </>
+                    ) : null}
+                  </div>
                 </div>
               );
             })}
@@ -184,6 +200,18 @@ function ProductList({ UpdateFullProductsList, addToCart }: Props) {
           )}
         </div>
       )}
+      <ToastContainer
+        position="bottom-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+        theme="dark"
+      />
     </>
   );
 }

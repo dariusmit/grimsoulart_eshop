@@ -1,8 +1,15 @@
 import Collapsible from "./Collapsible";
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useLocation } from "react-router-dom";
 
-function ProductPage() {
+interface Props {
+  addToCart: (id: number) => void;
+  quantities: number[];
+}
+
+function ProductPage({ addToCart, quantities }: Props) {
   const api_url =
     "https://www.admin.dariusmolotokas.lt/wp-json/wp/v2/products?acf_format=standard&_fields=id,title,acf&per_page=30";
 
@@ -89,6 +96,22 @@ function ProductPage() {
               ) {
                 return (
                   <div className="w-full" key={product.id}>
+                    {product.acf.sold_status === false ? (
+                      <button
+                        onClick={() => {
+                          addToCart(product.id);
+                          if (!quantities.includes(product.id)) {
+                            toast("Item added to cart!");
+                          } else {
+                            toast("Item already in the cart!");
+                          }
+                        }}
+                        className="w-full px-4 py-2 border hover:scale-105 transition ease-in-out duration-300 bg-gray-700 border-black text-white mb-4"
+                      >
+                        Add to Cart
+                      </button>
+                    ) : null}
+
                     <a key={product.id} className="w-full">
                       <button className="w-full px-4 py-2 border hover:scale-105 transition ease-in-out duration-300 bg-black border-black text-white mb-4">
                         Buy it Now
@@ -254,6 +277,18 @@ function ProductPage() {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+        theme="dark"
+      />
     </>
   );
 }
