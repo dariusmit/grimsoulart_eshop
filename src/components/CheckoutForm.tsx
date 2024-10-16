@@ -5,7 +5,7 @@ interface Props {
   setContactInfo: (firstName: string, lastName: string, email: string) => void;
 }
 
-function CheckoutForm({ firstName, lastName, email, setContactInfo }: Props) {
+function CheckoutForm({ setContactInfo }: Props) {
   return (
     <>
       <form className="flex flex-col">
