@@ -1,8 +1,9 @@
-import Collapsible from "./Collapsible";
+import Collapsible from "../components/Collapsible";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   addToCart: (id: number) => void;
@@ -10,6 +11,8 @@ interface Props {
 }
 
 function ProductPage({ addToCart, quantities }: Props) {
+  const navigate = useNavigate();
+
   const api_url =
     "https://www.admin.dariusmolotokas.lt/wp-json/wp/v2/products?acf_format=standard&_fields=id,title,acf&per_page=30";
 
@@ -113,7 +116,13 @@ function ProductPage({ addToCart, quantities }: Props) {
                     ) : null}
 
                     <a key={product.id} className="w-full">
-                      <button className="w-full px-4 py-2 border hover:scale-105 transition ease-in-out duration-300 bg-black border-black text-white mb-4">
+                      <button
+                        onClick={() => {
+                          addToCart(product.id);
+                          navigate("/checkout");
+                        }}
+                        className="w-full px-4 py-2 border hover:scale-105 transition ease-in-out duration-300 bg-black border-black text-white mb-4"
+                      >
                         Buy it Now
                       </button>
                     </a>

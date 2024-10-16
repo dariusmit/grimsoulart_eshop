@@ -1,12 +1,12 @@
-import CommissionsCard from "./CommissionsCard";
-import ReviewCard from "./ReviewCard";
+import CommissionsCard from "../components/CommissionsCard";
+import ReviewCard from "../components/ReviewCard";
 import LightGalleryComponent from "lightgallery/react";
 import "lightgallery/css/lightgallery.css";
 import commissionsList from "../data/commissionsList";
 import type { LightGallery } from "lightgallery/lightgallery";
 import { useRef } from "react";
 
-function CommissionsPage() {
+function Commissions() {
   const lightboxRef = useRef<LightGallery | null>(null);
 
   function openLightbox(id: number) {
@@ -99,4 +99,4 @@ function CommissionsPage() {
   );
 }
 
-export default CommissionsPage;
+export default Commissions;

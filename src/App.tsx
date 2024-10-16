@@ -1,28 +1,30 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
-import Home from "./components/Home";
-import About from "./components/About";
-import Contact from "./components/Contact";
-import NoPage from "./components/NoPage";
-import ProductPage from "./components/ProductPage";
-import CommissionsPage from "./components/CommissionsPage";
-import ShoppingCart from "./components/ShoppingCart";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import NoPage from "./pages/NoPage";
+import ProductPage from "./pages/ProductPage";
+import CommissionsPage from "./pages/Commissions";
 import { useState } from "react";
-import Checkout from "./components/Checkout";
-import ConfirmationPage from "./components/ConfirmationPage";
+import Checkout from "./pages/Checkout";
+import ConfirmationPage from "./pages/Confirmation";
 
 function App() {
   let [fullProductsList, UpdateFullProductsList] = useState([]);
   let [quantities, setQuantities] = useState<number[]>([]);
+  let [cartModal, updateCartModal] = useState(false);
   const isPaid = true;
+  let firstName: string = "";
+  let lastName: string = "";
+  let email: string = "";
+  let total: number = 0;
 
   function addToCart(id: number) {
     if (!quantities.includes(id)) {
       setQuantities((oldArray) => [...oldArray, id]);
     }
   }
-
-  let total: number = 0;
 
   function deleteItem(id: number) {
     setQuantities(quantities.filter((item) => item !== id));
@@ -39,6 +41,8 @@ function App() {
               fullProductsList={fullProductsList}
               total={total}
               deleteItem={deleteItem}
+              cartModal={cartModal}
+              updateCartModal={updateCartModal}
             />
           }
         >
@@ -63,32 +67,30 @@ function App() {
             }
           />
           <Route
-            path="cart"
-            element={
-              <ShoppingCart
-                quantities={quantities}
-                setQuantities={setQuantities}
-                fullProductsList={fullProductsList}
-                total={total}
-                deleteItem={deleteItem}
-              />
-            }
-          />
-          <Route
             path="checkout"
             element={
               <Checkout
                 quantities={quantities}
-                setQuantities={setQuantities}
                 fullProductsList={fullProductsList}
                 total={total}
                 deleteItem={deleteItem}
+                updateCartModal={updateCartModal}
+                firstName=""
+                lastName=""
+                email=""
               />
             }
           />
           <Route
             path="confirmation"
-            element={<ConfirmationPage isPaid={isPaid} />}
+            element={
+              <ConfirmationPage
+                firstName={firstName}
+                lastName={lastName}
+                email={email}
+                isPaid={isPaid}
+              />
+            }
           />
           <Route path="*" element={<NoPage />} />
         </Route>
