@@ -1,7 +1,7 @@
 import CartItems from "../components/CartItems";
 import CheckoutForm from "../components/CheckoutForm";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import orderData from "../types/orderData";
 
 interface Props {
   quantities: number[];
@@ -9,9 +9,8 @@ interface Props {
   total: number;
   deleteItem: (id: number) => void;
   updateCartModal: React.Dispatch<React.SetStateAction<boolean>>;
-  firstName: string;
-  lastName: string;
-  email: string;
+  orderData: orderData;
+  updateOrderData: React.Dispatch<React.SetStateAction<orderData>>;
 }
 
 function Checkout({
@@ -20,21 +19,10 @@ function Checkout({
   total,
   deleteItem,
   updateCartModal,
-  firstName,
-  lastName,
-  email,
+  orderData,
+  updateOrderData,
 }: Props) {
   const navigate = useNavigate();
-
-  function setContactInfo(
-    firstName: string,
-    lastName: string,
-    email: string
-  ): void {
-    firstName = firstName;
-    lastName = lastName;
-    email = email;
-  }
 
   return (
     <>
@@ -47,10 +35,8 @@ function Checkout({
           <div className="mr-8">
             <p className="text-xl mb-6">Contact info:</p>
             <CheckoutForm
-              firstName={firstName}
-              lastName={lastName}
-              email={email}
-              setContactInfo={setContactInfo}
+              orderData={orderData}
+              updateOrderData={updateOrderData}
             />
           </div>
           <div className="pr-8 min-w-[300px] overflow-y-scroll">
@@ -62,11 +48,6 @@ function Checkout({
               updateCartModal={updateCartModal}
             />
           </div>
-        </div>
-        <div className="bg-black mt-8 text-white w-1/3">
-          <Link to="/confirmation" className="w-full p-4 block">
-            Place Order
-          </Link>
         </div>
       </div>
       {quantities.length === 0 ? navigate("/") : null}

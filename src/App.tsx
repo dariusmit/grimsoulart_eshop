@@ -9,24 +9,27 @@ import CommissionsPage from "./pages/Commissions";
 import { useState } from "react";
 import Checkout from "./pages/Checkout";
 import ConfirmationPage from "./pages/Confirmation";
+import orderData from "./types/orderData";
 
 function App() {
   let [fullProductsList, UpdateFullProductsList] = useState([]);
   let [quantities, setQuantities] = useState<number[]>([]);
   let [cartModal, updateCartModal] = useState(false);
   const isPaid = true;
-  let firstName: string = "";
-  let lastName: string = "";
-  let email: string = "";
+  let [orderData, updateOrderData] = useState<orderData>({
+    firstName: "",
+    lastName: "",
+    email: "",
+  });
   let total: number = 0;
 
-  function addToCart(id: number) {
+  function addToCart(id: number): void {
     if (!quantities.includes(id)) {
       setQuantities((oldArray) => [...oldArray, id]);
     }
   }
 
-  function deleteItem(id: number) {
+  function deleteItem(id: number): void {
     setQuantities(quantities.filter((item) => item !== id));
   }
 
@@ -75,9 +78,8 @@ function App() {
                 total={total}
                 deleteItem={deleteItem}
                 updateCartModal={updateCartModal}
-                firstName=""
-                lastName=""
-                email=""
+                orderData={orderData}
+                updateOrderData={updateOrderData}
               />
             }
           />
@@ -85,10 +87,12 @@ function App() {
             path="confirmation"
             element={
               <ConfirmationPage
-                firstName={firstName}
-                lastName={lastName}
-                email={email}
+                orderData={orderData}
                 isPaid={isPaid}
+                quantities={quantities}
+                setQuantities={setQuantities}
+                total={total}
+                fullProductsList={fullProductsList}
               />
             }
           />

@@ -24,7 +24,7 @@ function ProductPage({ addToCart, quantities }: Props) {
 
   const location = useLocation();
 
-  async function getData() {
+  async function getData(): Promise<void> {
     const req = await fetch(api_url);
     const product = await req.json();
     UpdateProductData(product);

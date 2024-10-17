@@ -23,7 +23,7 @@ const Contact = () => {
   let [btnBgColor, setBtnBgColor] = useState("");
   let [submitBtn, isClicked] = useState(false);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     isClicked(true);
     console.log(submitBtn);
     e.preventDefault();
@@ -92,7 +92,7 @@ const Contact = () => {
     }
   }
 
-  function closeMsg() {
+  function closeMsg(): void {
     setSubmitMsg("");
     updateCloseBtn("");
     setBtnBgColor("bg-transparent");

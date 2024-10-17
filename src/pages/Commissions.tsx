@@ -9,7 +9,7 @@ import { useRef } from "react";
 function Commissions() {
   const lightboxRef = useRef<LightGallery | null>(null);
 
-  function openLightbox(id: number) {
+  function openLightbox(id: number): void {
     lightboxRef.current?.openGallery(id - 1);
   }
 

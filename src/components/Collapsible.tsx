@@ -10,7 +10,7 @@ function Collapsible({ title, children, style }: Props) {
   let [collapsibleClass, setCollapsibleClass] = useState("hidden");
   let [collapsibleArrow, changeCollapsibleArrow] = useState("up");
 
-  function setEmoji() {
+  function setEmoji(): ReactNode {
     if (title == "Instant Download") {
       return <p className="mr-2">🚚</p>;
     } else if (title == "What People Say") {
@@ -18,7 +18,7 @@ function Collapsible({ title, children, style }: Props) {
     } else return <p className="mr-2">📝</p>;
   }
 
-  function openCollapsile() {
+  function openCollapsile(): void {
     if (collapsibleClass === "hidden") {
       setCollapsibleClass("block");
     } else {

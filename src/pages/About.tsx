@@ -12,7 +12,7 @@ const About = () => {
   let [title, changeTitle] = useState("");
   let [body, changeBody] = useState("");
 
-  async function getData() {
+  async function getData(): Promise<void> {
     let { data } = await axios.get(api_url);
     data.content.rendered = data.content.rendered.replace("<p>", "");
     data.content.rendered = data.content.rendered.replace("</p>", "");

@@ -14,15 +14,10 @@ interface Props {
 
 function ProductList({ UpdateFullProductsList, addToCart, quantities }: Props) {
   const [searchParams, setSearchParams] = useSearchParams();
-
   let [pagesCount, setPagesCount] = useState<number>(0);
   let [itemsCount, setItemsCount] = useState<number>(0);
-
   let [paginatedProducts, UpdatePaginatedProducts] = useState([]);
-
   let [isLoading, UpdateLoadingStatus] = useState(true);
-
-  // Read current page from search params, fallback to storage
   const currentPage = Number(searchParams.get("p")) || getCurrentPage();
 
   // Fetch data for the current page
@@ -36,19 +31,19 @@ function ProductList({ UpdateFullProductsList, addToCart, quantities }: Props) {
     saveCurrentPage(currentPage);
   }, [currentPage]);
 
-  function prevPage() {
+  function prevPage(): void {
     if (currentPage !== 1) {
       setSearchParams({ p: `${currentPage - 1}` });
     }
   }
 
-  function nextPage() {
+  function nextPage(): void {
     if (currentPage !== pagesCount) {
       setSearchParams({ p: `${currentPage + 1}` });
     }
   }
 
-  function saveCurrentPage(currentPage: number) {
+  function saveCurrentPage(currentPage: number): void {
     sessionStorage.setItem("current page", String(currentPage));
   }
 
@@ -56,7 +51,7 @@ function ProductList({ UpdateFullProductsList, addToCart, quantities }: Props) {
     return Number(sessionStorage.getItem("current page") || 1);
   }
 
-  async function calcPagesAndItemsCount() {
+  async function calcPagesAndItemsCount(): Promise<void> {
     const api_url = `https://www.admin.dariusmolotokas.lt/wp-json/wp/v2/products?acf_format=standard&_fields=id,title,acf&per_page=99`;
     const req = await fetch(api_url);
     const products = await req.json();
@@ -65,7 +60,7 @@ function ProductList({ UpdateFullProductsList, addToCart, quantities }: Props) {
     setPagesCount(Math.ceil(products.length / 9));
   }
 
-  async function getData(currentPage: number) {
+  async function getData(currentPage: number): Promise<void> {
     UpdateLoadingStatus(true);
     const api_url = `https://www.admin.dariusmolotokas.lt/wp-json/wp/v2/products?acf_format=standard&_fields=id,title,acf&per_page=9&page=${currentPage}`;
     const req = await fetch(api_url);

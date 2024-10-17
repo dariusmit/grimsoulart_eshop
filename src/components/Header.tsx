@@ -60,7 +60,7 @@ function Header({
   let [mobileMenuVisibility, setMobileMenuVisibility] = useState(false);
   let [mobileMenuPosition, setMobileMenuPosition] = useState("absolute");
 
-  function revealMobileMenu() {
+  function revealMobileMenu(): void {
     if (mobileMenuVisibility == false) {
       setMobileMenuVisibility(true);
       setMobileMenuPosition("fixed");
@@ -70,7 +70,7 @@ function Header({
     }
   }
 
-  function disableMobileMenu(status: boolean) {
+  function disableMobileMenu(status: boolean): void {
     if (status == true) {
       setMobileMenuVisibility(false);
       setMobileMenuPosition("absolute");
