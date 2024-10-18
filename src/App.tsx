@@ -90,6 +90,7 @@ function App() {
                 orderData={orderData}
                 isPaid={isPaid}
                 quantities={quantities}
+                updateOrderData={updateOrderData}
                 setQuantities={setQuantities}
                 total={total}
                 fullProductsList={fullProductsList}

@@ -202,7 +202,7 @@ function ProductList({ UpdateFullProductsList, addToCart, quantities }: Props) {
         newestOnTop
         closeOnClick
         rtl={false}
-        pauseOnFocusLoss
+        pauseOnFocusLoss={false}
         draggable
         pauseOnHover={false}
         theme="dark"

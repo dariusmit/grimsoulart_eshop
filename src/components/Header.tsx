@@ -85,7 +85,7 @@ function Header({
       >
         <Link to={"/?p=1"}>
           <img
-            className="my-10 w-[250px] h-auto min-[1024px]:hover:scale-[104%] min-[1024px]:transition  min-[1024px]:ease-in-out min-[1024px]:duration-300 min-[1024px]:mb-6 min-[1024px]:mt-0"
+            className="my-10 w-[250px] h-auto min-[1024px]:mb-6 min-[1024px]:mt-0"
             src="../../images/logo.png"
           ></img>
         </Link>
@@ -144,7 +144,7 @@ function Header({
           </p>
         </button>
         {cartModal ? (
-          <div className="absolute z-20 w-auto h-auto top-[173px] right-4 min-w-[370px] min-h-[200px] max-h-[590px] overflow-y-auto bg-black px-8 pb-8 pt-4">
+          <div className="absolute z-20 w-auto h-auto top-[173px] right-4 min-w-[370px] min-h-[200px] bg-black px-8 pb-8 pt-4">
             <CartItems
               quantities={quantities}
               fullProductsList={fullProductsList}

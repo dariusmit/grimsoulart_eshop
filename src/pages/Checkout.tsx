@@ -2,6 +2,7 @@ import CartItems from "../components/CartItems";
 import CheckoutForm from "../components/CheckoutForm";
 import { useNavigate } from "react-router-dom";
 import orderData from "../types/orderData";
+import { useEffect } from "react";
 
 interface Props {
   quantities: number[];
@@ -23,6 +24,9 @@ function Checkout({
   updateOrderData,
 }: Props) {
   const navigate = useNavigate();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
@@ -31,7 +35,7 @@ function Checkout({
             min-[1024px]:mx-auto min-[1024px]:items-center min-[1024px]:min-h-[515px]
             min-[1440px]:max-w-[1110px]"
       >
-        <div className="flex flex-row min-h-[260px] max-h-[450px]">
+        <div className="flex flex-row">
           <div className="mr-8">
             <p className="text-xl mb-6">Contact info:</p>
             <CheckoutForm
@@ -39,7 +43,7 @@ function Checkout({
               updateOrderData={updateOrderData}
             />
           </div>
-          <div className="pr-8 min-w-[300px] overflow-y-scroll">
+          <div className="pr-8 min-w-[300px]">
             <CartItems
               quantities={quantities}
               fullProductsList={fullProductsList}

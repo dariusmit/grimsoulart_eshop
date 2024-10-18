@@ -27,34 +27,36 @@ function CartItems({
           <h1 className="text-xl">Items in cart:</h1>
         </div>
       ) : null}
-      {fullProductsList.map((product: any) => {
-        if (quantities.includes(product.id)) {
-          total += Number(product.acf.price);
-          return (
-            <div
-              className="flex items-center p-4 justify-between"
-              key={product.id}
-            >
-              <div className="flex">
-                <img
-                  className="w-[50px] h-[50px] mr-4 object-cover"
-                  src={product.acf.thumb}
-                />
-                <div className="flex flex-col mr-4">
-                  <p>{product.title.rendered}</p>
-                  <p>{product.acf.price} EUR</p>
-                </div>
-              </div>
-              <button
-                onClick={() => deleteItem(product.id)}
-                className="text-red-400"
+      <div className="overflow-y-auto max-h-[420px] max-w-[315px] pr-6">
+        {fullProductsList.map((product: any) => {
+          if (quantities.includes(product.id)) {
+            total += Number(product.acf.price);
+            return (
+              <div
+                className="flex items-center p-4 justify-between"
+                key={product.id}
               >
-                remove
-              </button>
-            </div>
-          );
-        }
-      })}
+                <div className="flex">
+                  <img
+                    className="w-[50px] h-[50px] mr-4 object-cover"
+                    src={product.acf.thumb}
+                  />
+                  <div className="flex flex-col mr-4">
+                    <p>{product.title.rendered}</p>
+                    <p>{product.acf.price} EUR</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => deleteItem(product.id)}
+                  className="text-red-400"
+                >
+                  remove
+                </button>
+              </div>
+            );
+          }
+        })}
+      </div>
       {quantities.length !== 0 ? (
         <p className="text-xl mb-8 mt-4 ml-4">Total: {total} EUR</p>
       ) : null}
@@ -63,7 +65,7 @@ function CartItems({
           <Link
             to="/checkout"
             onClick={() => updateCartModal(false)}
-            className="bg-white text-black mx-4 mb-4 mt-6 p-2 block text-center"
+            className="bg-white text-black border-2 border-black mx-4 mb-4 mt-6 p-2 block text-center hover:text-white hover:bg-black hover:border-white"
           >
             Go to Checkout
           </Link>

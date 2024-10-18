@@ -109,7 +109,7 @@ function ProductPage({ addToCart, quantities }: Props) {
                             toast("Item already in the cart!");
                           }
                         }}
-                        className="w-full px-4 py-2 border hover:scale-105 transition ease-in-out duration-300 bg-gray-700 border-black text-white mb-4"
+                        className="w-full px-4 py-2 border-2 bg-gray-700 border-gray-700 text-white hover:bg-white hover:text-black mb-4"
                       >
                         Add to Cart
                       </button>
@@ -121,7 +121,7 @@ function ProductPage({ addToCart, quantities }: Props) {
                           addToCart(product.id);
                           navigate("/checkout");
                         }}
-                        className="w-full px-4 py-2 border hover:scale-105 transition ease-in-out duration-300 bg-black border-black text-white mb-4"
+                        className="w-full px-4 py-2 border-2 bg-black border-black text-white hover:bg-white hover:text-black mb-4"
                       >
                         Buy it Now
                       </button>
@@ -293,7 +293,7 @@ function ProductPage({ addToCart, quantities }: Props) {
         newestOnTop
         closeOnClick
         rtl={false}
-        pauseOnFocusLoss
+        pauseOnFocusLoss={false}
         draggable
         pauseOnHover={false}
         theme="dark"

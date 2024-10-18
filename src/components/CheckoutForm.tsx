@@ -85,7 +85,7 @@ function CheckoutForm({ orderData, updateOrderData }: Props) {
       >
         <label htmlFor="fname">First name:</label>
         <input
-          className="bg-slate-200 mb-4"
+          className="bg-slate-200"
           onChange={(e) => {
             updateOrderData((prev) => {
               return { ...prev, firstName: e.target.value };
@@ -95,10 +95,10 @@ function CheckoutForm({ orderData, updateOrderData }: Props) {
           id="fname"
           name="fname"
         />
-        <p className="text-red-500">{errorMessage.firstNameErr}</p>
+        <p className="text-red-500 mb-4">{errorMessage.firstNameErr}</p>
         <label htmlFor="lname">Last name:</label>
         <input
-          className="bg-slate-200 mb-4"
+          className="bg-slate-200"
           onChange={(e) => {
             updateOrderData((prev) => {
               return { ...prev, lastName: e.target.value };
@@ -108,7 +108,7 @@ function CheckoutForm({ orderData, updateOrderData }: Props) {
           id="lname"
           name="lname"
         />
-        <p className="text-red-500">{errorMessage.lastNameErr}</p>
+        <p className="text-red-500 mb-4">{errorMessage.lastNameErr}</p>
         <label htmlFor="email">Email:</label>
         <input
           onChange={(e) => {
@@ -121,9 +121,9 @@ function CheckoutForm({ orderData, updateOrderData }: Props) {
           id="email"
           name="email"
         />
-        <p className="text-red-500">{errorMessage.emailErr}</p>
+        <p className="text-red-500 mb-6">{errorMessage.emailErr}</p>
         <button
-          className="bg-black text-white min-[1024px]:hover:scale-105 w-full min-[1024px]:transition min-[1024px]:ease-in-out min-[1024px]:duration-300 px-4 py-2 mt-4 min-[1024px]:w-[226px]"
+          className="bg-black text-white w-full border-2 border-black hover:bg-white hover:text-black px-4 py-2 mt-4 min-[1024px]:w-[226px]"
           type="submit"
           value="Submit"
         >

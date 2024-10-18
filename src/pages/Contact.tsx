@@ -93,6 +93,7 @@ const Contact = () => {
   }
 
   function closeMsg(): void {
+    setSubmitStatus(false);
     setSubmitMsg("");
     updateCloseBtn("");
     setBtnBgColor("bg-transparent");
@@ -172,7 +173,7 @@ const Contact = () => {
             </div>
           </div>
           <button
-            className="bg-black text-white min-[1024px]:hover:scale-105 w-full min-[1024px]:transition min-[1024px]:ease-in-out min-[1024px]:duration-300 px-4 py-2 mt-4 min-[1024px]:w-[226px]"
+            className="bg-black text-white w-full border-2 border-black hover:bg-white hover:text-black px-4 py-2 mt-4 min-[1024px]:w-[226px]"
             type="submit"
             value="Submit"
           >
@@ -184,7 +185,7 @@ const Contact = () => {
             <p className="mr-4">{submitMsg}</p>
             <button
               className={
-                "text-white hover:scale-105 transition ease-in-out duration-300 px-4 py-2 " +
+                "text-white px-4 border-2 border-black hover:bg-white hover:text-black py-2 " +
                 btnBgColor
               }
               onClick={closeMsg}
