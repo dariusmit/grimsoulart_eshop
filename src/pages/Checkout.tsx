@@ -35,15 +35,15 @@ function Checkout({
             min-[1024px]:mx-auto min-[1024px]:items-center min-[1024px]:min-h-[515px]
             min-[1440px]:max-w-[1110px]"
       >
-        <div className="flex flex-row">
-          <div className="mr-8">
+        <div className="flex flex-col-reverse min-[1024px]:flex-row">
+          <div className="p-4 min-[1024px]:p-0 min-[1024px]:mr-8">
             <p className="text-xl mb-6">Contact info:</p>
             <CheckoutForm
               orderData={orderData}
               updateOrderData={updateOrderData}
             />
           </div>
-          <div className="pr-8 min-w-[300px]">
+          <div className="min-[1024px]:pr-8 min-w-[300px]">
             <CartItems
               quantities={quantities}
               fullProductsList={fullProductsList}

@@ -136,15 +136,15 @@ function Header({
               updateCartModal(true);
             }
           }}
-          className="w-[50px] flex h-auto absolute z-9 right-0 my-auto mr-28"
+          className="w-[30px] min-[1024px]:w-[50px] flex h-auto absolute pt-3 mr-3 z-9 right-0 top-0 my-auto min-[1024px]:mr-28 min-[1024px]:top-1/2 min-[1024px]:pt-0"
         >
           <img className="w-[30px]" src="../../images/cart.svg" />
-          <p className="flex items-center justify-center absolute z-99 ml-[15px] mt-[20px] bg-white text-black rounded-full w-[20px] h-[20px]">
+          <p className="hidden min-[1024px]:flex items-center justify-center absolute z-99 min-[1024px]:ml-[15px] min-[1024px]:mt-[20px] bg-white text-black rounded-full w-[20px] h-[20px]">
             {quantities.length}
           </p>
         </button>
         {cartModal ? (
-          <div className="absolute z-20 w-auto h-auto top-[173px] right-4 min-w-[370px] min-h-[200px] bg-black px-8 pb-8 pt-4">
+          <div className="absolute z-20 w-full min-[1024px]:w-auto h-auto top-[120px] min-[1024px]:top-[173px] right-0 min-[1024px]:right-4 min-w-[370px] min-h-[200px] bg-black px-8 pb-8 pt-4">
             <CartItems
               quantities={quantities}
               fullProductsList={fullProductsList}

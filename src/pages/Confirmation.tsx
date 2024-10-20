@@ -46,7 +46,7 @@ function Confirmation({
     <>
       {isPaid ? (
         <div
-          className="flex flex-col w-full min-h-[611px]
+          className="p-4 min-[1024px]:p-0 flex flex-col w-full min-h-[611px]
             min-[1024px]:mx-auto min-[1024px]:items-center
             min-[1440px]:max-w-[1110px]"
         >

@@ -27,7 +27,7 @@ function CartItems({
           <h1 className="text-xl">Items in cart:</h1>
         </div>
       ) : null}
-      <div className="overflow-y-auto max-h-[420px] max-w-[315px] pr-6">
+      <div className="overflow-y-auto max-h-[250px] min-[1024px]:max-h-[420px] max-w-[315px] pr-6">
         {fullProductsList.map((product: any) => {
           if (quantities.includes(product.id)) {
             total += Number(product.acf.price);
