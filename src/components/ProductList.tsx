@@ -1,18 +1,16 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Button from "./Button";
 import LoadingAnimatedItem from "./LoadingAnimatedItem";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Context } from "../context/storeContext";
 
-interface Props {
-  UpdateFullProductsList: React.Dispatch<React.SetStateAction<never[]>>;
-  addToCart: (id: number) => void;
-  quantities: number[];
-}
+function ProductList() {
+  const { quantities, UpdateFullProductsList, addToCart, saveProductList } =
+    useContext(Context);
 
-function ProductList({ UpdateFullProductsList, addToCart, quantities }: Props) {
   const [searchParams, setSearchParams] = useSearchParams();
   let [pagesCount, setPagesCount] = useState<number>(0);
   let [itemsCount, setItemsCount] = useState<number>(0);
@@ -56,6 +54,7 @@ function ProductList({ UpdateFullProductsList, addToCart, quantities }: Props) {
     const req = await fetch(api_url);
     const products = await req.json();
     UpdateFullProductsList(products);
+    saveProductList(products);
     setItemsCount(products.length);
     setPagesCount(Math.ceil(products.length / 9));
   }

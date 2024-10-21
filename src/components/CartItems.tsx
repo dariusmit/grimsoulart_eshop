@@ -1,20 +1,11 @@
 import { Link } from "react-router-dom";
+import { Context } from "../context/storeContext";
+import { useContext } from "react";
 
-interface Props {
-  quantities: number[];
-  fullProductsList: any;
-  total: number;
-  deleteItem: (id: number) => void;
-  updateCartModal: React.Dispatch<React.SetStateAction<boolean>>;
-}
+function CartItems() {
+  let { total, deleteItem, updateCartModal, fullProductsList, quantities } =
+    useContext(Context);
 
-function CartItems({
-  quantities,
-  fullProductsList,
-  total,
-  deleteItem,
-  updateCartModal,
-}: Props) {
   return (
     <>
       {location.pathname !== "/checkout" ? (

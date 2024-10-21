@@ -1,13 +1,6 @@
 import ProductList from "../components/ProductList";
 
-interface Props {
-  fullProductsList: any;
-  UpdateFullProductsList: React.Dispatch<React.SetStateAction<never[]>>;
-  addToCart: (id: number) => void;
-  quantities: number[];
-}
-
-const Home = ({ UpdateFullProductsList, addToCart, quantities }: Props) => {
+const Home = () => {
   return (
     <>
       <div
@@ -15,11 +8,7 @@ const Home = ({ UpdateFullProductsList, addToCart, quantities }: Props) => {
             min-[1024px]:mx-auto min-[1024px]:justify-between
             min-[1440px]:max-w-[1110px]"
       >
-        <ProductList
-          UpdateFullProductsList={UpdateFullProductsList}
-          addToCart={addToCart}
-          quantities={quantities}
-        />
+        <ProductList />
       </div>
     </>
   );

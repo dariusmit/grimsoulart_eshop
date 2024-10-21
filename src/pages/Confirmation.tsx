@@ -1,32 +1,25 @@
 import NoPage from "./NoPage";
-import orderData from "../types/orderData";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Context } from "../context/storeContext";
+import { useContext } from "react";
 
-interface Props {
-  isPaid: boolean;
-  orderData: orderData;
-  updateOrderData: React.Dispatch<React.SetStateAction<orderData>>;
-  quantities: number[];
-  setQuantities: React.Dispatch<React.SetStateAction<number[]>>;
-  fullProductsList: any;
-  total: number;
-}
+function Confirmation() {
+  let {
+    isPaid,
+    orderData,
+    updateOrderData,
+    getQuantities,
+    getProductList,
+    setQuantities,
+    total,
+  } = useContext(Context);
 
-function Confirmation({
-  isPaid,
-  orderData,
-  updateOrderData,
-  quantities,
-  setQuantities,
-  fullProductsList,
-  total,
-}: Props) {
   const navigate = useNavigate();
   let [itemsOrdered, updateItemsOrdered] = useState<number[]>([]);
 
   useEffect(() => {
-    updateItemsOrdered(quantities);
+    updateItemsOrdered(getQuantities());
     setQuantities([]);
     if (
       orderData.firstName === "" &&
@@ -56,7 +49,7 @@ function Confirmation({
           <div className="w-[300px]">
             <p className="pb-4 self-start">Items ordered:</p>
             <div className="flex flex-col max-h-[250px] overflow-y-auto">
-              {fullProductsList.map((product: any) => {
+              {getProductList().map((product: any) => {
                 if (itemsOrdered.includes(product.id)) {
                   total += Number(product.acf.price);
                   return (

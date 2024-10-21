@@ -3,24 +3,12 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Navigation from "./Navigation";
 import CartItems from "./CartItems";
+import { useContext } from "react";
+import { Context } from "../context/storeContext";
 
-interface Props {
-  quantities: number[];
-  fullProductsList: any;
-  total: number;
-  deleteItem: (id: number) => void;
-  cartModal: boolean;
-  updateCartModal: React.Dispatch<React.SetStateAction<boolean>>;
-}
+function Header() {
+  const { quantities, cartModal, updateCartModal } = useContext(Context);
 
-function Header({
-  quantities,
-  fullProductsList,
-  total,
-  deleteItem,
-  cartModal,
-  updateCartModal,
-}: Props) {
   let [homeLink, setHomeLink] = useState("");
   let [commissionsLink, setCommissionsLink] = useState("");
   let [aboutLink, setAboutLink] = useState("");
@@ -145,13 +133,7 @@ function Header({
         </button>
         {cartModal ? (
           <div className="absolute z-20 w-full min-[1024px]:w-auto h-auto top-[120px] min-[1024px]:top-[173px] right-0 min-[1024px]:right-4 min-w-[370px] min-h-[200px] bg-black px-8 pb-8 pt-4">
-            <CartItems
-              quantities={quantities}
-              fullProductsList={fullProductsList}
-              total={total}
-              deleteItem={deleteItem}
-              updateCartModal={updateCartModal}
-            />
+            <CartItems />
           </div>
         ) : null}
       </div>

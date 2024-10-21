@@ -4,13 +4,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { Context } from "../context/storeContext";
+import { useContext } from "react";
 
-interface Props {
-  addToCart: (id: number) => void;
-  quantities: number[];
-}
+function ProductPage() {
+  const { addToCart, quantities } = useContext(Context);
 
-function ProductPage({ addToCart, quantities }: Props) {
   const navigate = useNavigate();
 
   const api_url =

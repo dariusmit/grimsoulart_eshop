@@ -1,14 +1,12 @@
-import orderData from "../types/orderData";
 import { useRef } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Context } from "../context/storeContext";
+import { useContext } from "react";
 
-interface Props {
-  orderData: orderData;
-  updateOrderData: React.Dispatch<React.SetStateAction<orderData>>;
-}
+function CheckoutForm() {
+  const { orderData, updateOrderData } = useContext(Context);
 
-function CheckoutForm({ orderData, updateOrderData }: Props) {
   const form: any = useRef();
   const navigate = useNavigate();
 

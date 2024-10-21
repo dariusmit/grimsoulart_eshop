@@ -1,28 +1,13 @@
 import CartItems from "../components/CartItems";
 import CheckoutForm from "../components/CheckoutForm";
 import { useNavigate } from "react-router-dom";
-import orderData from "../types/orderData";
 import { useEffect } from "react";
+import { Context } from "../context/storeContext";
+import { useContext } from "react";
 
-interface Props {
-  quantities: number[];
-  fullProductsList: any;
-  total: number;
-  deleteItem: (id: number) => void;
-  updateCartModal: React.Dispatch<React.SetStateAction<boolean>>;
-  orderData: orderData;
-  updateOrderData: React.Dispatch<React.SetStateAction<orderData>>;
-}
+function Checkout() {
+  const { quantities } = useContext(Context);
 
-function Checkout({
-  quantities,
-  fullProductsList,
-  total,
-  deleteItem,
-  updateCartModal,
-  orderData,
-  updateOrderData,
-}: Props) {
   const navigate = useNavigate();
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -38,19 +23,10 @@ function Checkout({
         <div className="flex flex-col-reverse min-[1024px]:flex-row">
           <div className="p-4 min-[1024px]:p-0 min-[1024px]:mr-8">
             <p className="text-xl mb-6">Contact info:</p>
-            <CheckoutForm
-              orderData={orderData}
-              updateOrderData={updateOrderData}
-            />
+            <CheckoutForm />
           </div>
           <div className="min-[1024px]:pr-8 min-w-[300px]">
-            <CartItems
-              quantities={quantities}
-              fullProductsList={fullProductsList}
-              total={total}
-              deleteItem={deleteItem}
-              updateCartModal={updateCartModal}
-            />
+            <CartItems />
           </div>
         </div>
       </div>
