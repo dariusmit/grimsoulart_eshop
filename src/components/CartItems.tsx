@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Context } from "../context/storeContext";
 import { useContext } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 function CartItems() {
   let { total, deleteItem, updateCartModal, fullProductsList, quantities } =
@@ -38,7 +39,18 @@ function CartItems() {
                   </div>
                 </div>
                 <button
-                  onClick={() => deleteItem(product.id)}
+                  onClick={() => {
+                    deleteItem(product.id),
+                      toast.success("Successfully deleted!", {
+                        position: "bottom-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "dark",
+                      });
+                  }}
                   className="text-red-400"
                 >
                   remove
@@ -66,6 +78,7 @@ function CartItems() {
           Cart is empty...
         </p>
       )}
+      <ToastContainer />
     </>
   );
 }

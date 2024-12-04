@@ -17,6 +17,7 @@ dist-ssr
 .env.local
 .vscode/*
 backup
+server
 index.html
 !.vscode/extensions.json
 .idea

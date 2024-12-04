@@ -8,8 +8,13 @@ import "react-toastify/dist/ReactToastify.css";
 import { Context } from "../context/storeContext";
 
 function ProductList() {
-  const { quantities, UpdateFullProductsList, addToCart, saveProductList } =
-    useContext(Context);
+  const {
+    quantities,
+    fullProductsList,
+    UpdateFullProductsList,
+    addToCart,
+    saveProductList,
+  } = useContext(Context);
 
   const [searchParams, setSearchParams] = useSearchParams();
   let [pagesCount, setPagesCount] = useState<number>(0);
@@ -17,8 +22,10 @@ function ProductList() {
   let [paginatedProducts, UpdatePaginatedProducts] = useState([]);
   let [isLoading, UpdateLoadingStatus] = useState(true);
   const currentPage = Number(searchParams.get("p")) || getCurrentPage();
+  const [search, setSearch] = useState<string>("");
+  const [soldFilter, setSoldFilter] = useState(false);
 
-  // Fetch data for the current page
+  //Fetch products for current page
   useEffect(() => {
     window.scrollTo(0, 0);
     if (currentPage === 1) {
@@ -28,6 +35,15 @@ function ProductList() {
     calcPagesAndItemsCount();
     saveCurrentPage(currentPage);
   }, [currentPage]);
+
+  useEffect(() => {
+    //Debounce function to trigger API fetch only once per user input. Waits 2 seconds after last call of itself.
+    const delayDebounceFn = setTimeout(() => {
+      getData(currentPage);
+      calcPagesAndItemsCount();
+    }, 2000);
+    return () => clearTimeout(delayDebounceFn);
+  }, [search]);
 
   function prevPage(): void {
     if (currentPage !== 1) {
@@ -50,7 +66,7 @@ function ProductList() {
   }
 
   async function calcPagesAndItemsCount(): Promise<void> {
-    const api_url = `https://www.admin.dariusmolotokas.lt/wp-json/wp/v2/products?acf_format=standard&_fields=id,title,acf&per_page=99`;
+    const api_url = `https://www.admin.dariusmolotokas.lt/wp-json/wp/v2/products?acf_format=standard&_fields=id,title,acf&per_page=99&search=${search}`;
     const req = await fetch(api_url);
     const products = await req.json();
     UpdateFullProductsList(products);
@@ -61,17 +77,69 @@ function ProductList() {
 
   async function getData(currentPage: number): Promise<void> {
     UpdateLoadingStatus(true);
-    const api_url = `https://www.admin.dariusmolotokas.lt/wp-json/wp/v2/products?acf_format=standard&_fields=id,title,acf&per_page=9&page=${currentPage}`;
+    const api_url = `https://www.admin.dariusmolotokas.lt/wp-json/wp/v2/products?acf_format=standard&_fields=id,title,acf&per_page=9&page=${currentPage}&search=${search}`;
     const req = await fetch(api_url);
     const products = await req.json();
-    UpdatePaginatedProducts(products);
+    if (products.length !== 0) {
+      UpdatePaginatedProducts(products);
+    } else {
+      setSearch("");
+      toast.error("Product was not found. Try a different search term!");
+    }
     UpdateLoadingStatus(false);
   }
+
+  let filteredProducts;
+
+  useEffect(() => {
+    if (fullProductsList) {
+      filteredProducts = fullProductsList.filter((product: any) => {
+        return product.acf.sold_status === soldFilter;
+      });
+      UpdatePaginatedProducts(filteredProducts);
+      console.log(filteredProducts);
+    }
+  }, [soldFilter]);
 
   return (
     <>
       {paginatedProducts && paginatedProducts.length > 0 ? (
         <>
+          <div className="flex min-[1024px]:flex-row w-full mb-4">
+            <div className="flex flex-col mr-4">
+              <label htmlFor="search" className="mb-2">
+                Search product:
+              </label>
+              <input
+                id="search"
+                name={search}
+                onChange={(e) => {
+                  const upperCaseSearch =
+                    e.target.value.charAt(0).toUpperCase() +
+                    e.target.value.slice(1);
+                  setSearch(upperCaseSearch);
+                }}
+                placeholder="Enter product name..."
+                type="text"
+                className="p-2 border-2 rounded-md"
+              />
+            </div>
+            <div className="flex flex-col mr-4">
+              <label htmlFor="filter" className="mb-2">
+                Select a filter:
+              </label>
+              <select
+                name="filter"
+                onChange={(e) => setSoldFilter(Boolean(e.target.value))}
+                id="filter"
+                className="p-2"
+              >
+                <option label="Not sold">{0}</option>
+                <option label="Sold">{1}</option>
+              </select>
+            </div>
+            {JSON.stringify(soldFilter)}
+          </div>
           <div className="flex flex-col min-[1024px]:flex-row w-full justify-between items-center mb-4">
             <div className="flex">
               <div className="px-4 pb-4 min-[1024px]:p-0 min-[1024px]:mr-3">
@@ -139,9 +207,9 @@ function ProductList() {
                           onClick={() => {
                             addToCart(product.id);
                             if (!quantities.includes(product.id)) {
-                              toast("Item added to cart!");
+                              toast.success("Item added to cart!");
                             } else {
-                              toast("Item already in the cart!");
+                              toast.warn("Item already in the cart!");
                             }
                           }}
                         >
@@ -196,14 +264,14 @@ function ProductList() {
       )}
       <ToastContainer
         position="bottom-right"
-        autoClose={2000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop
         closeOnClick
         rtl={false}
-        pauseOnFocusLoss={false}
+        pauseOnFocusLoss
         draggable
-        pauseOnHover={false}
+        pauseOnHover
         theme="dark"
       />
     </>

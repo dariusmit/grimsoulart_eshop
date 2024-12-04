@@ -103,9 +103,9 @@ function ProductPage() {
                         onClick={() => {
                           addToCart(product.id);
                           if (!quantities.includes(product.id)) {
-                            toast("Item added to cart!");
+                            toast.success("Item added to cart!");
                           } else {
-                            toast("Item already in the cart!");
+                            toast.warn("Item already in the cart!");
                           }
                         }}
                         className="w-full px-4 py-2 border-2 bg-gray-700 border-gray-700 text-white hover:bg-white hover:text-black mb-4"
@@ -287,14 +287,14 @@ function ProductPage() {
       </div>
       <ToastContainer
         position="bottom-right"
-        autoClose={2000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop
         closeOnClick
         rtl={false}
-        pauseOnFocusLoss={false}
+        pauseOnFocusLoss
         draggable
-        pauseOnHover={false}
+        pauseOnHover
         theme="dark"
       />
     </>
