@@ -8,13 +8,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { Context } from "../context/storeContext";
 
 function ProductList() {
-  const {
-    quantities,
-    fullProductsList,
-    UpdateFullProductsList,
-    addToCart,
-    saveProductList,
-  } = useContext(Context);
+  const { quantities, UpdateFullProductsList, addToCart, saveProductList } =
+    useContext(Context);
 
   const [searchParams, setSearchParams] = useSearchParams();
   let [pagesCount, setPagesCount] = useState<number>(0);
@@ -23,7 +18,7 @@ function ProductList() {
   let [isLoading, UpdateLoadingStatus] = useState(true);
   const currentPage = Number(searchParams.get("p")) || getCurrentPage();
   const [search, setSearch] = useState<string>("");
-  const [soldFilter, setSoldFilter] = useState(false);
+  const [soldFilter, setSoldFilter] = useState("17,18");
 
   //Fetch products for current page
   useEffect(() => {
@@ -66,7 +61,7 @@ function ProductList() {
   }
 
   async function calcPagesAndItemsCount(): Promise<void> {
-    const api_url = `https://www.admin.dariusmolotokas.lt/wp-json/wp/v2/products?acf_format=standard&_fields=id,title,acf&per_page=99&search=${search}`;
+    const api_url = `https://www.admin.dariusmolotokas.lt/wp-json/wp/v2/products?acf_format=standard&_fields=id,title,acf&per_page=99&search=${search}&tags=${soldFilter}`;
     const req = await fetch(api_url);
     const products = await req.json();
     UpdateFullProductsList(products);
@@ -77,7 +72,7 @@ function ProductList() {
 
   async function getData(currentPage: number): Promise<void> {
     UpdateLoadingStatus(true);
-    const api_url = `https://www.admin.dariusmolotokas.lt/wp-json/wp/v2/products?acf_format=standard&_fields=id,title,acf&per_page=9&page=${currentPage}&search=${search}`;
+    const api_url = `https://www.admin.dariusmolotokas.lt/wp-json/wp/v2/products?acf_format=standard&_fields=id,title,acf&per_page=9&page=${currentPage}&search=${search}&tags=${soldFilter}`;
     const req = await fetch(api_url);
     const products = await req.json();
     if (products.length !== 0) {
@@ -89,16 +84,10 @@ function ProductList() {
     UpdateLoadingStatus(false);
   }
 
-  let filteredProducts;
-
   useEffect(() => {
-    if (fullProductsList) {
-      filteredProducts = fullProductsList.filter((product: any) => {
-        return product.acf.sold_status === soldFilter;
-      });
-      UpdatePaginatedProducts(filteredProducts);
-      console.log(filteredProducts);
-    }
+    getData(currentPage);
+    calcPagesAndItemsCount();
+    //Reikia dar kazkaip su pagination sutvarkyti, nes jei esu 2 page ir pafiltruoju turetu permesti i atitinkama psl atitinkamai pagal kieki.
   }, [soldFilter]);
 
   return (
@@ -130,15 +119,16 @@ function ProductList() {
               </label>
               <select
                 name="filter"
-                onChange={(e) => setSoldFilter(Boolean(e.target.value))}
+                value={soldFilter}
+                onChange={(e) => setSoldFilter(e.target.value)}
                 id="filter"
                 className="p-2"
               >
-                <option label="Not sold">{0}</option>
-                <option label="Sold">{1}</option>
+                <option value="17,18">No filter</option>
+                <option value="18">Not sold</option>
+                <option value="17">Sold</option>
               </select>
             </div>
-            {JSON.stringify(soldFilter)}
           </div>
           <div className="flex flex-col min-[1024px]:flex-row w-full justify-between items-center mb-4">
             <div className="flex">
